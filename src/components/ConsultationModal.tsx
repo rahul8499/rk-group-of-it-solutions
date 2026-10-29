@@ -26,6 +26,13 @@ export default function ConsultationModal({
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [loadedAt, setLoadedAt] = useState<number>(0);
+  const [isRateLimited, setIsRateLimited] = useState(false);
+
+  useEffect(() => {
+    setLoadedAt(Date.now());
+  }, []);
 
   useEffect(() => {
     if (initialService) {
@@ -57,6 +64,7 @@ export default function ConsultationModal({
     e.preventDefault();
     setStatus("loading");
     setErrorMessage("");
+    setIsRateLimited(false);
 
     try {
       const res = await fetch("/api/contact", {
@@ -65,11 +73,16 @@ export default function ConsultationModal({
         body: JSON.stringify({
           ...formData,
           source: "Free Consultation Modal",
+          website_url: honeypot,
+          _loadedAt: loadedAt,
         }),
       });
 
       const data = await res.json();
       if (!res.ok) {
+        if (res.status === 429) {
+          setIsRateLimited(true);
+        }
         throw new Error(data.message || "Failed to submit request.");
       }
 
@@ -171,12 +184,49 @@ export default function ConsultationModal({
             </div>
 
             {status === "error" && (
-              <div className="mb-4 p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs">
-                {errorMessage}
+              <div
+                className={`mb-4 p-3.5 rounded-xl border text-xs animate-shake ${
+                  isRateLimited
+                    ? "bg-amber-500/10 border-amber-500/30 text-amber-200"
+                    : "bg-rose-500/10 border-rose-500/30 text-rose-300"
+                }`}
+              >
+                <div className="flex items-start gap-2">
+                  <span className="text-sm">{isRateLimited ? "🛡️" : "⚠️"}</span>
+                  <div className="flex-1 space-y-1.5">
+                    <div className="font-semibold text-white">
+                      {isRateLimited ? "Anti-Spam Security Protection" : "Submission Notice"}
+                    </div>
+                    <p className="leading-relaxed">{errorMessage}</p>
+                    {isRateLimited && (
+                      <a
+                        href={getWhatsAppDirectLink()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs transition mt-1"
+                      >
+                        <span>Chat on WhatsApp Directly ↗</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Anti-spam honeypot - invisible to humans, traps automated scrapers */}
+              <div className="hidden opacity-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
+                <label htmlFor="modal_website_url">Leave this empty</label>
+                <input
+                  type="text"
+                  id="modal_website_url"
+                  name="website_url"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">
                   Your Full Name <span className="text-electric-400">*</span>

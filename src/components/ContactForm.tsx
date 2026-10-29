@@ -18,6 +18,13 @@ export default function ContactForm() {
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [submissionId, setSubmissionId] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [loadedAt, setLoadedAt] = useState<number>(0);
+  const [isRateLimited, setIsRateLimited] = useState(false);
+
+  React.useEffect(() => {
+    setLoadedAt(Date.now());
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -29,6 +36,7 @@ export default function ContactForm() {
     e.preventDefault();
     setFormStatus("submitting");
     setFeedbackMessage("");
+    setIsRateLimited(false);
 
     // Basic validation
     if (!formData.name.trim() || !formData.projectDescription.trim()) {
@@ -47,12 +55,19 @@ export default function ContactForm() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          website_url: honeypot, // Honeypot trap
+          _loadedAt: loadedAt, // Velocity verification
+        }),
       });
 
       const result = await response.json();
 
       if (!response.ok) {
+        if (response.status === 429) {
+          setIsRateLimited(true);
+        }
         throw new Error(result.message || "Failed to submit enquiry.");
       }
 
@@ -156,10 +171,47 @@ export default function ContactForm() {
             </p>
           </div>
 
+          {/* Anti-spam honeypot - invisible to users, traps automated bots */}
+          <div className="hidden opacity-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
+            <label htmlFor="website_url">Leave this empty</label>
+            <input
+              type="text"
+              id="website_url"
+              name="website_url"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           {formStatus === "error" && (
-            <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-              <span className="font-bold">⚠️</span>
-              <span>{feedbackMessage}</span>
+            <div
+              className={`p-4 rounded-xl border text-xs sm:text-sm animate-shake ${
+                isRateLimited
+                  ? "bg-amber-500/10 border-amber-500/30 text-amber-200"
+                  : "bg-rose-500/10 border-rose-500/30 text-rose-300"
+              }`}
+            >
+              <div className="flex items-start gap-2.5">
+                <span className="text-base">{isRateLimited ? "🛡️" : "⚠️"}</span>
+                <div className="flex-1 space-y-2">
+                  <div className="font-semibold text-white">
+                    {isRateLimited ? "Anti-Spam Security Protection Active" : "Submission Notice"}
+                  </div>
+                  <p className="leading-relaxed">{feedbackMessage}</p>
+                  {isRateLimited && (
+                    <a
+                      href={getDirectWhatsAppUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition shadow-md shadow-emerald-600/20"
+                    >
+                      <span>Connect Directly on WhatsApp 💬</span>
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
           )}
 

@@ -16,21 +16,21 @@ export default function BrandLogo({
   variant = "badge-with-text",
 }: BrandLogoProps) {
   const iconDimensions = {
-    sm: { width: 34, height: 41, className: "w-8 h-auto" },
-    md: { width: 44, height: 53, className: "w-10 h-auto" },
-    lg: { width: 56, height: 67, className: "w-13 h-auto" },
+    sm: { width: 36, height: 44, className: "w-9 h-auto" },
+    md: { width: 48, height: 58, className: "w-11 sm:w-12 h-auto" },
+    lg: { width: 62, height: 75, className: "w-14 sm:w-16 h-auto" },
   };
 
   const textSizes = {
-    sm: "text-base",
-    md: "text-lg",
-    lg: "text-2xl",
+    sm: "text-base font-bold",
+    md: "text-lg sm:text-xl font-black",
+    lg: "text-2xl sm:text-3xl font-black",
   };
 
   const subTextSizes = {
-    sm: "text-[9px] tracking-wider",
-    md: "text-[10px] tracking-widest",
-    lg: "text-xs tracking-widest",
+    sm: "text-[9px] tracking-wider font-semibold",
+    md: "text-[10px] sm:text-[11px] tracking-widest font-bold",
+    lg: "text-xs tracking-widest font-bold",
   };
 
   if (variant === "full-image") {
@@ -42,7 +42,7 @@ export default function BrandLogo({
       >
         <div className="relative h-12 sm:h-14 w-auto">
           <Image
-            src="/rklogo.png"
+            src="/rk-logo.png"
             alt="RK Group of IT Solutions"
             width={240}
             height={100}
@@ -64,14 +64,14 @@ export default function BrandLogo({
     >
       {/* Real 3D Isometric RK Emblem Icon */}
       <div
-        className={`relative ${dim.className} flex-shrink-0 flex items-center justify-center filter drop-shadow-[0_4px_16px_rgba(0,102,255,0.35)] transition-transform duration-300 group-hover:scale-105`}
+        className={`relative ${dim.className} flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
       >
         <Image
           src="/rk-emblem.png"
           alt="RK Group of IT Solutions 3D Logo"
           width={dim.width * 2} // 2x for Retina sharpness
           height={dim.height * 2}
-          className="w-full h-auto object-contain"
+          className="w-full h-auto object-contain filter drop-shadow-[0_2px_10px_rgba(0,102,255,0.35)]"
           priority
         />
       </div>

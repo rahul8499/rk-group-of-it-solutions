@@ -1,0 +1,56 @@
+[
+  {
+    "enquiryId": "RK-176232",
+    "timestamp": "2026-10-29T20:52:56.232Z",
+    "source": "Website Contact Form",
+    "clientIp": "203.0.***.***",
+    "client": {
+      "name": "Client User 0",
+      "businessName": "Not specified",
+      "email": "Not provided",
+      "phone": "9876543210",
+      "preferredContact": "WhatsApp"
+    },
+    "project": {
+      "service": "Website Development",
+      "budget": "Not specified",
+      "description": "Legitimate enquiry description number 0 for testing rate limiter"
+    }
+  },
+  {
+    "enquiryId": "RK-101895",
+    "timestamp": "2026-10-29T20:51:41.895Z",
+    "source": "Website Contact Form",
+    "clientIp": "::1",
+    "client": {
+      "name": "Security Test 2",
+      "businessName": "Not specified",
+      "email": "Not provided",
+      "phone": "9876543211",
+      "preferredContact": "WhatsApp"
+    },
+    "project": {
+      "service": "Website Development",
+      "budget": "Not specified",
+      "description": "Rapid request test"
+    }
+  },
+  {
+    "enquiryId": "RK-089449",
+    "timestamp": "2026-10-29T20:51:29.449Z",
+    "source": "Website Contact Form",
+    "clientIp": "::1",
+    "client": {
+      "name": "Security Test",
+      "businessName": "Not specified",
+      "email": "Not provided",
+      "phone": "9876543210",
+      "preferredContact": "WhatsApp"
+    },
+    "project": {
+      "service": "Website Development",
+      "budget": "Not specified",
+      "description": "Security Rate Limit Verification Test"
+    }
+  }
+]

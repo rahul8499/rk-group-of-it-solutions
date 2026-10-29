@@ -39,15 +39,14 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? "bg-navy-950/90 backdrop-blur-md border-b border-electric-500/15 shadow-xl shadow-navy-950/50 py-3"
-            : "bg-transparent py-4 sm:py-5 border-b border-white/5"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled
+          ? "bg-[#030E20]/95 backdrop-blur-md border-b border-electric-500/20 shadow-xl shadow-[#020914]/80 py-3"
+          : "bg-[#030E20] border-b border-electric-500/15 shadow-md shadow-[#020914]/40 py-3.5 sm:py-4"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <BrandLogo size="md" />
+          <BrandLogo />
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
@@ -60,11 +59,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    isActive
-                      ? "text-electric-400 bg-electric-500/10 border border-electric-500/20"
-                      : "text-slate-300 hover:text-white hover:bg-white/5"
-                  }`}
+                  className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${isActive
+                    ? "text-electric-400 bg-electric-500/10 border border-electric-500/20"
+                    : "text-slate-300 hover:text-white hover:bg-white/5"
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -130,11 +128,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                     key={link.name}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-4 py-3 rounded-xl text-base font-medium transition ${
-                      isActive
-                        ? "bg-electric-500/15 text-electric-400 border border-electric-500/30"
-                        : "text-slate-200 hover:bg-white/5"
-                    }`}
+                    className={`block px-4 py-3 rounded-xl text-base font-medium transition ${isActive
+                      ? "bg-electric-500/15 text-electric-400 border border-electric-500/30"
+                      : "text-slate-200 hover:bg-white/5"
+                      }`}
                   >
                     {link.name}
                   </Link>

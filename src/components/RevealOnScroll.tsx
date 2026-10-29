@@ -15,7 +15,7 @@ export default function RevealOnScroll({
   className = "",
   delay = 0,
   direction = "up",
-  threshold = 0.15,
+  threshold = 0.08,
 }: RevealOnScrollProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ export default function RevealOnScroll({
       },
       {
         threshold: threshold,
-        rootMargin: "0px 0px -40px 0px",
+        rootMargin: "0px 0px -20px 0px",
       }
     );
 
@@ -49,13 +49,13 @@ export default function RevealOnScroll({
   const getInitialTransform = () => {
     switch (direction) {
       case "up":
-        return "translate-y-10 opacity-0";
+        return "translate-y-8 opacity-0";
       case "down":
-        return "-translate-y-10 opacity-0";
+        return "-translate-y-8 opacity-0";
       case "left":
-        return "translate-x-10 opacity-0";
+        return "translate-x-8 opacity-0";
       case "right":
-        return "-translate-x-10 opacity-0";
+        return "-translate-x-8 opacity-0";
       case "scale":
         return "scale-95 opacity-0";
       case "fade":
@@ -69,9 +69,10 @@ export default function RevealOnScroll({
       ref={ref}
       style={{
         transitionDelay: `${delay}ms`,
-        transitionDuration: "700ms",
+        transitionDuration: "600ms",
+        willChange: isVisible ? "auto" : "transform, opacity",
       }}
-      className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`transform-gpu transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isVisible
           ? "translate-y-0 translate-x-0 scale-100 opacity-100"
           : getInitialTransform()
