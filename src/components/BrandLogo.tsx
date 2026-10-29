@@ -31,7 +31,7 @@ export default function BrandLogo({
     >
       <div className={`relative ${sizeClasses[size]} flex items-center justify-center`}>
         <Image
-          src="/brand-logo.png?v=solutions"
+          src="/brand-solutions-logo.png"
           alt="RK Group of IT Solutions - Your Vision | Our Innovation"
           width={987}
           height={269}
