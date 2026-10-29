@@ -22,9 +22,6 @@ export default function Footer() {
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <BrandLogo size="lg" />
-            <p className="text-xs sm:text-sm text-electric-400 font-mono tracking-wide">
-              {siteConfig.tagline}
-            </p>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
               Helping small businesses, local retail shops, startups, and growing enterprises solve real operational problems with practical, high-performance digital technology.
             </p>

@@ -64,7 +64,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   companyName: "RK Group of IT Solutions",
-  tagline: "Your Vision | Our Code | Better Tomorrow",
+  tagline: "Your Vision | Our Innovation",
   businessType: "IT Services, Software Development, and Digital Solutions",
   description:
     "RK Group of IT Solutions helps small businesses, startups, shops, and growing companies solve real business problems with practical websites, mobile apps, and custom software.",

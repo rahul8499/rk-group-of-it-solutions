@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
 
 // ============================================================================
 // SECURITY & IN-MEMORY RATE LIMITER
@@ -266,29 +264,8 @@ export async function POST(request: Request) {
       },
     };
 
-    // 9. LOG & SAVE TO PERMANENT DISK (data/enquiries.json)
-    console.log(`[RK Group Contact API] New Verified Lead (#${enquiryId}) from IP ${clientIp}`);
-
-    try {
-      const dataDir = path.join(process.cwd(), "data");
-      const filePath = path.join(dataDir, "enquiries.json");
-
-      await fs.mkdir(dataDir, { recursive: true });
-
-      let existingEnquiries: unknown[] = [];
-      try {
-        const fileContent = await fs.readFile(filePath, "utf-8");
-        existingEnquiries = JSON.parse(fileContent);
-        if (!Array.isArray(existingEnquiries)) existingEnquiries = [];
-      } catch {
-        existingEnquiries = [];
-      }
-
-      existingEnquiries.unshift(enquiryRecord);
-      await fs.writeFile(filePath, JSON.stringify(existingEnquiries, null, 2), "utf-8");
-    } catch (fileErr) {
-      console.error("[RK Group Contact API] Error saving to file:", fileErr);
-    }
+    // 9. LOG VERIFIED LEAD DETAILS (Recorded in Vercel Runtime Logs)
+    console.log(`[RK Group Contact API] New Verified Lead (#${enquiryId}) from IP ${clientIp}:`, JSON.stringify(enquiryRecord));
 
     // 10. OPTIONAL WEBHOOK (Discord, Slack, Zapier, Telegram, Google Sheets)
     if (process.env.LEAD_WEBHOOK_URL) {

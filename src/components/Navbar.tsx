@@ -40,8 +40,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled
-          ? "bg-[#030E20]/95 backdrop-blur-md border-b border-electric-500/20 shadow-xl shadow-[#020914]/80 py-3"
-          : "bg-[#030E20] border-b border-electric-500/15 shadow-md shadow-[#020914]/40 py-3.5 sm:py-4"
+          ? "bg-[#030E20]/95 backdrop-blur-md border-b border-electric-500/20 shadow-xl shadow-[#020914]/80 py-1.5 sm:py-2"
+          : "bg-[#030E20] border-b border-electric-500/15 shadow-md shadow-[#020914]/40 py-2 sm:py-2.5"
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
