@@ -6,8 +6,6 @@ import Footer from "./Footer";
 import WhatsAppButton from "./WhatsAppButton";
 import ConsultationModal from "./ConsultationModal";
 
-import MobileBottomBar from "./MobileBottomBar";
-
 interface ConsultationContextType {
   openConsultation: (serviceId?: string) => void;
 }
@@ -34,23 +32,18 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <ConsultationContext.Provider value={{ openConsultation }}>
-      <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100 selection:bg-electric-500/30 selection:text-white pb-14 sm:pb-0">
+      <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100 selection:bg-electric-500/30 selection:text-white">
         {/* Sticky Global Navigation */}
         <Navbar onOpenConsultation={() => openConsultation()} />
 
-        {/* Main Routed Page Content */}
-        <main className="flex-1 pt-20 sm:pt-24">{children}</main>
+        {/* Main Routed Page Content (Compact padding on phone, spacious on desktop) */}
+        <main className="flex-1 pt-14 sm:pt-24">{children}</main>
 
         {/* Global Footer */}
         <Footer />
 
-        {/* Desktop / Tablet Floating Quick WhatsApp Action */}
-        <div className="hidden sm:block">
-          <WhatsAppButton />
-        </div>
-
-        {/* Mobile Persistent Quick Action Bar */}
-        <MobileBottomBar />
+        {/* Floating Quick WhatsApp Icon (Mobile + Desktop in bottom right) */}
+        <WhatsAppButton />
 
         {/* Global Consultation Modal */}
         <ConsultationModal

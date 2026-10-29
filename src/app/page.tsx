@@ -97,13 +97,13 @@ export default function HomePage() {
   return (
     <div className="space-y-24 sm:space-y-32 pb-24 overflow-hidden">
       {/* 1. HERO SECTION */}
-      <section className="relative px-4 sm:px-6 lg:px-8 pt-8 sm:pt-16 max-w-7xl mx-auto">
+      <section className="relative px-4 sm:px-6 lg:px-8 pt-2 sm:pt-16 max-w-7xl mx-auto">
         {/* Glow Effects */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-electric-500/10 blur-[130px] rounded-full pointer-events-none -z-10 animate-pulse-slow" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Text */}
-          <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-center lg:text-left">
             <RevealOnScroll direction="down" delay={50}>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-electric-500/10 border border-electric-500/25 text-electric-400 text-xs font-semibold shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-electric-400 animate-pulse" />
@@ -112,23 +112,23 @@ export default function HomePage() {
             </RevealOnScroll>
 
             <RevealOnScroll direction="up" delay={150}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] sm:leading-[1.12]">
                 Technology Solutions That Help Your{" "}
                 <span className="text-gradient-electric">Business Grow</span>
               </h1>
             </RevealOnScroll>
 
             <RevealOnScroll direction="up" delay={250}>
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 We build professional websites, mobile apps, and custom software to help businesses simplify their work, improve efficiency, and grow digitally.
               </p>
             </RevealOnScroll>
 
             <RevealOnScroll direction="up" delay={350}>
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+              <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-3.5">
                 <button
                   onClick={() => openConsultation()}
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-electric-500 hover:bg-electric-600 text-white font-semibold text-sm transition-all duration-200 shadow-xl shadow-electric-500/25 hover:shadow-electric-500/40 active:scale-95 flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-7 py-3 sm:py-3.5 rounded-xl bg-electric-500 hover:bg-electric-600 text-white font-semibold text-sm transition-all duration-200 shadow-xl shadow-electric-500/25 hover:shadow-electric-500/40 active:scale-95 flex items-center justify-center gap-2"
                 >
                   <span>Discuss Your Project</span>
                   <ArrowRight className="w-4 h-4" />
@@ -136,24 +136,24 @@ export default function HomePage() {
 
                 <Link
                   href="/services"
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-navy-900 hover:bg-navy-850 text-slate-200 font-medium text-sm transition border border-electric-500/20 hover:border-electric-400/40 text-center"
+                  className="w-full sm:w-auto px-6 py-3 sm:py-3.5 rounded-xl bg-navy-900 hover:bg-navy-850 text-slate-200 font-medium text-sm transition border border-electric-500/20 hover:border-electric-400/40 text-center"
                 >
                   Explore Our Services
                 </Link>
               </div>
 
               {/* Quick trust metrics */}
-              <div className="pt-4 flex items-center justify-center lg:justify-start gap-6 text-xs text-slate-400">
+              <div className="pt-2 sm:pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[11px] sm:text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                   Custom Architecture
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                   Transparent Timelines
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                   Ongoing Support
                 </span>
               </div>
