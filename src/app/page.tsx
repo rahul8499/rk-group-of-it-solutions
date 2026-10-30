@@ -107,12 +107,13 @@ export default function HomePage() {
             <RevealOnScroll direction="down" delay={50}>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-electric-500/10 border border-electric-500/25 text-electric-400 text-xs font-semibold shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-electric-400 animate-pulse" />
-                Professional IT Services & Software Development
+                <span>RK Group of IT Solutions • Professional IT Services & Software</span>
               </div>
             </RevealOnScroll>
 
             <RevealOnScroll direction="up" delay={150}>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] sm:leading-[1.12]">
+                <span className="sr-only">RK Group of IT Solutions | RK Group - </span>
                 Technology Solutions That Help Your{" "}
                 <span className="text-gradient-electric">Business Grow</span>
               </h1>
@@ -120,7 +121,7 @@ export default function HomePage() {
 
             <RevealOnScroll direction="up" delay={250}>
               <p className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                We build professional websites, mobile apps, and custom software to help businesses simplify their work, improve efficiency, and grow digitally.
+                Welcome to <strong className="font-semibold text-white">RK Group of IT Solutions</strong> (RK Group). We build professional websites, mobile apps, and custom software to help businesses simplify their work, improve efficiency, and grow digitally.
               </p>
             </RevealOnScroll>
 
