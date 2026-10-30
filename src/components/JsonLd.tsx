@@ -162,8 +162,20 @@ export default function JsonLd() {
           bestRating: "5",
           worstRating: "1",
         },
+        currenciesAccepted: "INR",
+        paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Net Banking",
+        hasMap: "https://maps.google.com/?q=Pune,Maharashtra,India",
         areaServed: [
           { "@type": "City", "name": "Pune" },
+          { "@type": "Place", "name": "Hinjewadi IT Park, Pune" },
+          { "@type": "Place", "name": "Kharadi & EON Free Zone, Pune" },
+          { "@type": "Place", "name": "Baner & Balewadi, Pune" },
+          { "@type": "Place", "name": "Wakad & Pimple Saudagar, Pune" },
+          { "@type": "Place", "name": "Kothrud, Pune" },
+          { "@type": "Place", "name": "Hadapsar & Magarpatta City, Pune" },
+          { "@type": "Place", "name": "Pimpri-Chinchwad (PCMC), Pune" },
+          { "@type": "City", "name": "Mumbai" },
+          { "@type": "City", "name": "Nashik" },
           { "@type": "State", "name": "Maharashtra" },
           { "@type": "Country", "name": "India" },
         ],
@@ -190,7 +202,8 @@ export default function JsonLd() {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              "@id": `${baseUrl}/services#${service.id}`,
+              "@id": `${baseUrl}/services/${service.id}`,
+              url: `${baseUrl}/services/${service.id}`,
               name: service.title,
               description: service.shortDescription,
               category: service.category,
@@ -262,7 +275,8 @@ export default function JsonLd() {
       // 5. Featured Software Products Schemas
       {
         "@type": "SoftwareApplication",
-        "@id": `${baseUrl}/projects#apani-dukan`,
+        "@id": `${baseUrl}/projects/apani-dukan`,
+        url: `${baseUrl}/projects/apani-dukan`,
         name: "Apani Dukan",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Android, iOS, Web",
@@ -271,6 +285,13 @@ export default function JsonLd() {
         },
         description:
           "Digital shopping and local store ordering application engineered by RK Group of IT Solutions to empower neighborhood shops to receive digital orders.",
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "28",
+          bestRating: "5",
+          worstRating: "1",
+        },
         offers: {
           "@type": "Offer",
           price: "0",
@@ -279,7 +300,8 @@ export default function JsonLd() {
       },
       {
         "@type": "SoftwareApplication",
-        "@id": `${baseUrl}/projects#fabrication-billing`,
+        "@id": `${baseUrl}/projects/fabrication-billing`,
+        url: `${baseUrl}/projects/fabrication-billing`,
         name: "Fabrication & Welding Billing Suite",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web, Windows, Android",
@@ -288,6 +310,13 @@ export default function JsonLd() {
         },
         description:
           "Specialized industrial estimation, metal weight calculation, and GST quotation software engineered for fabrication workshops.",
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "22",
+          bestRating: "5",
+          worstRating: "1",
+        },
         offers: {
           "@type": "Offer",
           price: "0",

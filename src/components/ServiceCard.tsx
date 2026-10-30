@@ -80,11 +80,11 @@ export default function ServiceCard({
       {/* Action Footer */}
       <div className="mt-5 pt-4 border-t border-white/5 flex items-center justify-between">
         <Link
-          href={`/services#${id}`}
+          href={`/services/${id}`}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-electric-400 hover:text-white transition-colors"
-          aria-label={`Learn more about ${title} services`}
+          aria-label={`View detailed guide and specifications for ${title} services in Pune`}
         >
-          <span>Learn More</span>
+          <span>View Service Details</span>
           <span className="sr-only">about {title}</span>
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
         </Link>

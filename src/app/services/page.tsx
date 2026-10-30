@@ -5,6 +5,7 @@ import Link from "next/link";
 import { siteConfig } from "@/config/siteConfig";
 import { useConsultation } from "@/components/SiteLayout";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import LocalServiceAreas from "@/components/LocalServiceAreas";
 import {
   Globe,
   Smartphone,
@@ -139,23 +140,38 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                {/* Ideal for banner */}
-                <div className="p-4 rounded-xl bg-navy-950/40 border border-white/5 flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-slate-400">
-                  <span className="font-semibold text-slate-200">Recommended for:</span>
-                  {service.idealFor.map((target, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-1 rounded-md bg-navy-800 text-slate-300 border border-white/5"
-                    >
-                      {target}
-                    </span>
-                  ))}
+                {/* Ideal for banner & Dedicated Page Link */}
+                <div className="p-4 rounded-xl bg-navy-950/40 border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-slate-400">
+                    <span className="font-semibold text-slate-200">Recommended for:</span>
+                    {service.idealFor.map((target, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2.5 py-1 rounded-md bg-navy-800 text-slate-300 border border-white/5"
+                      >
+                        {target}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Link
+                    href={`/services/${service.id}`}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-navy-800 hover:bg-navy-750 text-electric-400 hover:text-white border border-electric-500/20 text-xs font-semibold transition whitespace-nowrap self-stretch sm:self-auto justify-center"
+                  >
+                    <span>Full Specifications & Guide</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
               </div>
             </section>
           </RevealOnScroll>
         ))}
       </div>
+
+      {/* Local Pune Service Areas Authority */}
+      <RevealOnScroll direction="up">
+        <LocalServiceAreas />
+      </RevealOnScroll>
 
       {/* Bottom CTA */}
       <RevealOnScroll direction="scale">

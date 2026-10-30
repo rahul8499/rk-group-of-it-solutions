@@ -72,8 +72,13 @@ export const metadata: Metadata = {
     "Web Design Agency Pune",
     "Best IT Company in Maharashtra",
     "Software Development Agency India",
+    "Website Development in Pune",
+    "Mobile App Development Pune",
+    "Custom ERP Software Pune",
+    "Fabrication Billing Software Pune",
+    "IT Company Hinjewadi Pune",
   ],
-  authors: [{ name: siteConfig.companyName, url: baseUrl }],
+  authors: [{ name: "Rahul Kolhe", url: baseUrl }, { name: siteConfig.companyName, url: baseUrl }],
   creator: siteConfig.companyName,
   publisher: siteConfig.companyName,
   alternates: {
@@ -132,6 +137,16 @@ export const metadata: Metadata = {
   },
   category: "technology",
   classification: "IT Services and Software Development",
+  other: {
+    "geo.region": "IN-MH",
+    "geo.placename": "Pune, Maharashtra, India",
+    "geo.position": "18.5204;73.8567",
+    "ICBM": "18.5204, 73.8567",
+    "rating": "General",
+    "revisit-after": "7 days",
+    "coverage": "Pune, Maharashtra, India, Worldwide",
+    "distribution": "Global",
+  },
 };
 
 export default function RootLayout({

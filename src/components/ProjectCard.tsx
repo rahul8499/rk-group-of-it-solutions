@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle2, Layers, Cpu, ExternalLink, ChevronRight, X, Maximize2, ShoppingBag, Store, Monitor, Smartphone } from "lucide-react";
 import { ApaniDukanMockup, DashboardIllustration } from "./SvgIllustrations";
@@ -264,19 +265,28 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
 
           {/* Action Trigger */}
           <div className="pt-2">
-            <button
-              onClick={() => {
-                if (onOpenDetails) {
-                  onOpenDetails(project);
-                } else {
-                  setModalOpen(true);
-                }
-              }}
-              className="w-full py-2.5 px-4 rounded-xl bg-navy-800 hover:bg-electric-500 hover:text-white text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 border border-white/5 hover:border-transparent shadow-sm"
-            >
-              <span>View Case Study & Real Screens</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  if (onOpenDetails) {
+                    onOpenDetails(project);
+                  } else {
+                    setModalOpen(true);
+                  }
+                }}
+                className="flex-1 py-2.5 px-3 rounded-xl bg-navy-800 hover:bg-navy-750 text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 border border-white/5"
+              >
+                <span>Quick Preview</span>
+              </button>
+
+              <Link
+                href={`/projects/${project.id}`}
+                className="flex-1 py-2.5 px-3 rounded-xl bg-electric-500 hover:bg-electric-600 text-white text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-md shadow-electric-500/20 active:scale-95"
+              >
+                <span>Full Case Study</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -533,7 +543,15 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-white/10 flex justify-end">
+            <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+              <Link
+                href={`/projects/${project.id}`}
+                className="inline-flex items-center gap-1.5 text-xs text-electric-400 hover:text-white font-semibold transition"
+              >
+                <span>Open Dedicated Case Study Page</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+
               <button
                 onClick={() => setModalOpen(false)}
                 className="px-5 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-700 text-slate-200 text-xs font-semibold transition"

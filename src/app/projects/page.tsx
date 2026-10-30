@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/siteConfig";
 import ProjectCard, { ProjectData } from "@/components/ProjectCard";
 import { useConsultation } from "@/components/SiteLayout";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import LocalServiceAreas from "@/components/LocalServiceAreas";
 import { FolderGit2, CheckCircle2, Clock, Sparkles } from "lucide-react";
 
 export default function ProjectsPage() {
@@ -79,6 +80,11 @@ export default function ProjectsPage() {
           </div>
         )}
       </section>
+
+      {/* Localized Pune Coverage */}
+      <RevealOnScroll direction="up">
+        <LocalServiceAreas />
+      </RevealOnScroll>
 
       {/* Trust & Methodology Notice */}
       <RevealOnScroll direction="scale">

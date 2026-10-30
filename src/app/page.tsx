@@ -8,6 +8,7 @@ import { HeroTechVisual } from "@/components/SvgIllustrations";
 import ServiceCard from "@/components/ServiceCard";
 import ProjectEstimator from "@/components/ProjectEstimator";
 import FaqSection from "@/components/FaqSection";
+import LocalServiceAreas from "@/components/LocalServiceAreas";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { useConsultation } from "@/components/SiteLayout";
 import {
@@ -656,7 +657,16 @@ export default function HomePage() {
       </section>
 
       {/* ======================================================== */}
-      {/* 9. FREQUENTLY ASKED QUESTIONS (9th Section)               */}
+      {/* 9. LOCAL SERVICE AREAS & REGIONAL AUTHORITY               */}
+      {/* ======================================================== */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <RevealOnScroll direction="up">
+          <LocalServiceAreas />
+        </RevealOnScroll>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 10. FREQUENTLY ASKED QUESTIONS                           */}
       {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="up">

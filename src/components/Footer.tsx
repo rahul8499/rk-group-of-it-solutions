@@ -85,24 +85,40 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Our Services */}
-            <div className="space-y-3">
-              <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-white">
-                Our Services
-              </h4>
-              <ul className="space-y-2 text-xs sm:text-sm">
-                {siteConfig.services.map((svc) => (
-                  <li key={svc.id}>
+              {/* Our Services & Case Studies */}
+              <div className="space-y-3">
+                <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-white">
+                  Our Services
+                </h4>
+                <ul className="space-y-2 text-xs sm:text-sm">
+                  {siteConfig.services.map((svc) => (
+                    <li key={svc.id}>
+                      <Link
+                        href={`/services/${svc.id}`}
+                        className="text-slate-400 hover:text-electric-300 transition-colors"
+                      >
+                        {svc.title}
+                      </Link>
+                    </li>
+                  ))}
+                  <li className="pt-1 border-t border-white/5">
                     <Link
-                      href={`/services#${svc.id}`}
-                      className="text-slate-400 hover:text-electric-300 transition-colors"
+                      href="/projects/apani-dukan"
+                      className="text-slate-400 hover:text-emerald-400 transition-colors"
                     >
-                      {svc.title}
+                      Apani Dukan App
                     </Link>
                   </li>
-                ))}
-              </ul>
-            </div>
+                  <li>
+                    <Link
+                      href="/projects/fabrication-billing"
+                      className="text-slate-400 hover:text-emerald-400 transition-colors"
+                    >
+                      Fabrication Billing ERP
+                    </Link>
+                  </li>
+                </ul>
+              </div>
           </div>
 
           {/* Column 4: Contact & Consultations */}
