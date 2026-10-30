@@ -14,9 +14,25 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact Us & Project Discussion",
+  title: "Contact Us & Project Discussion | Free Consultation",
   description:
-    "Get in touch with RK Group of IT Solutions for websites, Android apps, custom billing software, and IT support.",
+    "Get in touch with RK Group of IT Solutions. Discuss your website, Android mobile app, or custom software requirements directly via WhatsApp (+91 77962 16506) or email.",
+  keywords: [
+    "Contact RK Group of IT Solutions",
+    "RK Group Phone Number",
+    "RK Group WhatsApp",
+    "Hire Web Developers Pune",
+    "IT Consultation India",
+  ],
+  alternates: {
+    canonical: "https://rkgroupitsolutions.com/contact",
+  },
+  openGraph: {
+    title: `Contact Us & Free Consultation | ${siteConfig.companyName}`,
+    description:
+      "Direct consultation with our engineering team for websites, mobile apps, and business software.",
+    url: "https://rkgroupitsolutions.com/contact",
+  },
 };
 
 export default function ContactPage() {
