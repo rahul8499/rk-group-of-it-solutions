@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     "IT Consultation India",
   ],
   alternates: {
-    canonical: "https://rkgroupitsolutions.com/contact",
+    canonical: "https://rkgroupofitsolutions.com/contact",
   },
   openGraph: {
     title: `Contact Us & Free Consultation | ${siteConfig.companyName}`,
     description:
       "Direct consultation with our engineering team for websites, mobile apps, and business software.",
-    url: "https://rkgroupitsolutions.com/contact",
+    url: "https://rkgroupofitsolutions.com/contact",
   },
 };
 

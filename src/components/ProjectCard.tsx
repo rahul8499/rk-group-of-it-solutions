@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { CheckCircle2, Layers, Cpu, ExternalLink, ChevronRight, X, Maximize2, ShoppingBag, Store } from "lucide-react";
+import { CheckCircle2, Layers, Cpu, ExternalLink, ChevronRight, X, Maximize2, ShoppingBag, Store, Monitor, Smartphone } from "lucide-react";
 import { ApaniDukanMockup, DashboardIllustration } from "./SvgIllustrations";
 
 export interface ProjectData {
@@ -19,6 +19,12 @@ export interface ProjectData {
   imagePath?: string;
   customerImagePath?: string;
   sellerImagePath?: string;
+  customerDesktopImagePath?: string;
+  customerMobileImagePath?: string;
+  sellerDesktopImagePath?: string;
+  sellerMobileImagePath?: string;
+  desktopImagePath?: string;
+  mobileImagePath?: string;
   mockupType?: "mobile" | "dashboard" | "system";
 }
 
@@ -30,6 +36,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [activeSide, setActiveSide] = useState<"customer" | "seller">("customer");
+  const [activeDevice, setActiveDevice] = useState<"desktop" | "mobile">("desktop");
 
   const getStatusBadge = (status: ProjectData["status"]) => {
     switch (status) {
@@ -57,26 +64,48 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
     }
   };
 
+  const getDisplayImage = (side: "customer" | "seller", device: "desktop" | "mobile"): string => {
+    if (side === "customer") {
+      return (
+        (device === "mobile"
+          ? project.customerMobileImagePath || project.customerImagePath
+          : project.customerDesktopImagePath || project.customerImagePath) ||
+        project.imagePath ||
+        "/projects/apani-dukan-customer-desktop.png"
+      );
+    } else {
+      return (
+        (device === "mobile"
+          ? project.sellerMobileImagePath || project.sellerImagePath
+          : project.sellerDesktopImagePath || project.sellerImagePath) ||
+        project.imagePath ||
+        "/projects/apani-dukan-seller-desktop.png"
+      );
+    }
+  };
+
   // Determine current active preview image
-  const displayImage =
+  const displayImage: string | undefined =
     project.customerImagePath && project.sellerImagePath
-      ? activeSide === "customer"
-        ? project.customerImagePath
-        : project.sellerImagePath
+      ? getDisplayImage(activeSide, activeDevice)
+      : project.desktopImagePath && project.mobileImagePath
+      ? activeDevice === "mobile"
+        ? project.mobileImagePath
+        : project.desktopImagePath
       : project.imagePath;
 
   return (
     <>
-      <div className="rounded-2xl bg-navy-900/80 border border-electric-500/15 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-electric-400/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-navy-950">
+      <div className="rounded-2xl bg-navy-900/80 border border-electric-500/15 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-electric-400/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-navy-950 h-full">
         {/* Visual Preview Section */}
-        <div className="relative h-60 bg-navy-950/90 border-b border-white/5 flex flex-col items-center justify-center p-3 overflow-hidden group">
+        <div className="relative h-64 bg-navy-950/90 border-b border-white/5 flex flex-col items-center justify-center p-3 overflow-hidden group">
           {displayImage ? (
             <div className="relative w-full h-full flex items-center justify-center">
               <Image
                 src={displayImage}
-                alt={`${project.title} (${activeSide} interface) - RK Group of IT Solutions`}
-                width={400}
-                height={260}
+                alt={`${project.title} (${activeSide} - ${activeDevice}) - RK Group of IT Solutions`}
+                width={500}
+                height={320}
                 className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105 rounded-lg shadow-lg"
                 priority={project.id === "apani-dukan"}
               />
@@ -98,37 +127,112 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
 
           {/* Dual Interface Switcher if both customer and seller exist */}
           {project.customerImagePath && project.sellerImagePath && (
-            <div className="absolute bottom-2.5 inset-x-2.5 flex items-center justify-between gap-2 z-10 bg-navy-950/90 backdrop-blur-md p-1 rounded-xl border border-white/10 shadow-lg">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveSide("customer");
-                }}
-                className={`flex-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition flex items-center justify-center gap-1 ${
-                  activeSide === "customer"
-                    ? "bg-electric-500 text-white shadow-md shadow-electric-500/30"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                <ShoppingBag className="w-3 h-3" />
-                <span>Customer View</span>
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveSide("seller");
-                }}
-                className={`flex-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition flex items-center justify-center gap-1 ${
-                  activeSide === "seller"
-                    ? "bg-electric-500 text-white shadow-md shadow-electric-500/30"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                <Store className="w-3 h-3" />
-                <span>Seller View</span>
-              </button>
+            <div className="absolute bottom-2 inset-x-2 flex items-center justify-between gap-1.5 z-10 bg-navy-950/95 backdrop-blur-md p-1.5 rounded-xl border border-white/10 shadow-xl">
+              {/* Role Tabs */}
+              <div className="flex items-center gap-1 flex-1">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSide("customer");
+                  }}
+                  className={`flex-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition flex items-center justify-center gap-1 ${
+                    activeSide === "customer"
+                      ? "bg-electric-500 text-white shadow-md shadow-electric-500/30"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <ShoppingBag className="w-3 h-3" />
+                  <span>Customer</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSide("seller");
+                  }}
+                  className={`flex-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition flex items-center justify-center gap-1 ${
+                    activeSide === "seller"
+                      ? "bg-electric-500 text-white shadow-md shadow-electric-500/30"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Store className="w-3 h-3" />
+                  <span>Seller</span>
+                </button>
+              </div>
+
+              {/* Device Toggle */}
+              <div className="flex items-center gap-0.5 p-0.5 rounded-lg bg-navy-900 border border-white/5">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveDevice("desktop");
+                  }}
+                  className={`py-0.5 px-1.5 rounded text-[10px] font-semibold transition flex items-center gap-0.5 ${
+                    activeDevice === "desktop"
+                      ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Monitor className="w-2.5 h-2.5" />
+                  <span>Desktop</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveDevice("mobile");
+                  }}
+                  className={`py-0.5 px-1.5 rounded text-[10px] font-semibold transition flex items-center gap-0.5 ${
+                    activeDevice === "mobile"
+                      ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Smartphone className="w-2.5 h-2.5" />
+                  <span>Mobile</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Dual Screen Switcher for Projects with Desktop & Mobile (e.g. Fabrication Billing) */}
+          {project.desktopImagePath && project.mobileImagePath && !project.customerImagePath && (
+            <div className="absolute bottom-2 inset-x-2 flex items-center justify-center z-10 bg-navy-950/95 backdrop-blur-md p-1.5 rounded-xl border border-white/10 shadow-xl">
+              <div className="flex items-center gap-1 p-0.5 rounded-lg bg-navy-900 border border-white/5 w-full justify-center">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveDevice("desktop");
+                  }}
+                  className={`flex-1 py-1 px-3 rounded-lg text-[10px] font-semibold transition flex items-center justify-center gap-1.5 ${
+                    activeDevice === "desktop"
+                      ? "bg-electric-500 text-white shadow-md shadow-electric-500/30"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Monitor className="w-3 h-3" />
+                  <span>Desktop View</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveDevice("mobile");
+                  }}
+                  className={`flex-1 py-1 px-3 rounded-lg text-[10px] font-semibold transition flex items-center justify-center gap-1.5 ${
+                    activeDevice === "mobile"
+                      ? "bg-electric-500 text-white shadow-md shadow-electric-500/30"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Smartphone className="w-3 h-3" />
+                  <span>Mobile View</span>
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -154,20 +258,6 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                   <span className="line-clamp-1">{feat}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Technologies Used */}
-          <div className="pt-3 border-t border-white/5">
-            <div className="flex flex-wrap gap-1.5">
-              {project.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2 py-0.5 rounded text-[11px] font-mono bg-navy-800 text-slate-300 border border-white/5"
-                >
-                  {tech}
-                </span>
               ))}
             </div>
           </div>
@@ -224,57 +314,164 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
               {project.title}
             </h2>
 
-            {/* Screenshots Display with Tabs */}
+            {/* Screenshots Display with 4 View Tabs */}
             {project.customerImagePath && project.sellerImagePath ? (
               <div className="mb-6 rounded-2xl bg-navy-950 border border-white/10 p-3 sm:p-4 space-y-3">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3 flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => setActiveSide("customer")}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
-                        activeSide === "customer"
-                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/20"
-                          : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
-                      }`}
-                    >
-                      <ShoppingBag className="w-3.5 h-3.5" />
-                      <span>Customer View (Nearby Stores)</span>
-                    </button>
-                    <button
-                      onClick={() => setActiveSide("seller")}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
-                        activeSide === "seller"
-                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/20"
-                          : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
-                      }`}
-                    >
-                      <Store className="w-3.5 h-3.5" />
-                      <span>Seller View (Store Setup & Orders)</span>
-                    </button>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {/* Role tabs */}
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => setActiveSide("customer")}
+                        className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
+                          activeSide === "customer"
+                            ? "bg-electric-500 text-white shadow-lg shadow-electric-500/20"
+                            : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
+                        }`}
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>Customer View</span>
+                      </button>
+                      <button
+                        onClick={() => setActiveSide("seller")}
+                        className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
+                          activeSide === "seller"
+                            ? "bg-electric-500 text-white shadow-lg shadow-electric-500/20"
+                            : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
+                        }`}
+                      >
+                        <Store className="w-3.5 h-3.5" />
+                        <span>Seller View</span>
+                      </button>
+                    </div>
+
+                    {/* Device toggle */}
+                    <div className="flex items-center gap-1 p-0.5 rounded-xl bg-navy-900 border border-white/5">
+                      <button
+                        type="button"
+                        onClick={() => setActiveDevice("desktop")}
+                        className={`py-1 px-2.5 rounded-lg text-[11px] font-semibold transition flex items-center gap-1 ${
+                          activeDevice === "desktop"
+                            ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <Monitor className="w-3.5 h-3.5" />
+                        <span>Desktop</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveDevice("mobile")}
+                        className={`py-1 px-2.5 rounded-lg text-[11px] font-semibold transition flex items-center gap-1 ${
+                          activeDevice === "mobile"
+                            ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <Smartphone className="w-3.5 h-3.5" />
+                        <span>Mobile</span>
+                      </button>
+                    </div>
                   </div>
+
                   <span className="text-[11px] text-electric-400 font-mono">
-                    {activeSide === "customer" ? "Verified Customer Interface" : "Verified Merchant Dashboard"}
+                    {activeSide === "customer"
+                      ? activeDevice === "desktop"
+                        ? "Customer Desktop Storefront"
+                        : "Customer Mobile Shopping App"
+                      : activeDevice === "desktop"
+                      ? "Merchant Desktop Admin Dashboard"
+                      : "Merchant Mobile Store Manager"}
                   </span>
                 </div>
 
                 <div className="relative rounded-xl overflow-hidden bg-navy-900/60 p-2 border border-white/5 flex items-center justify-center">
                   <Image
-                    src={activeSide === "customer" ? project.customerImagePath : project.sellerImagePath}
-                    alt={`${project.title} - ${activeSide} view`}
-                    width={800}
-                    height={500}
-                    className="w-full max-h-[380px] object-contain rounded-lg shadow-lg"
+                    src={getDisplayImage(activeSide, activeDevice)}
+                    alt={`${project.title} - ${activeSide} (${activeDevice}) view`}
+                    width={900}
+                    height={550}
+                    className="w-full max-h-[440px] object-contain rounded-lg shadow-lg"
                   />
                 </div>
 
                 <div className="text-xs text-slate-400 text-center px-2">
                   {activeSide === "customer" ? (
+                    activeDevice === "desktop" ? (
+                      <span>
+                        <strong className="text-slate-200">Customer Desktop Portal:</strong> Search verified local shops within 2km to 20km, category discovery & instant map directions.
+                      </span>
+                    ) : (
+                      <span>
+                        <strong className="text-slate-200">Customer Mobile App:</strong> Fast touch shopping, mobile cart, and direct WhatsApp 1-tap checkout.
+                      </span>
+                    )
+                  ) : activeDevice === "desktop" ? (
                     <span>
-                      <strong className="text-slate-200">Customer Portal:</strong> Customers discover verified local shops within 2km to 20km, search categories (garments, daily essentials), and order directly via WhatsApp.
+                      <strong className="text-slate-200">Merchant Desktop Dashboard:</strong> WhatsApp order number (<span className="text-electric-300 font-mono">7796216506</span>), 1-Click CSV bulk product import, variant sizing (XS-XXL, 28-46), and store GPS setup.
                     </span>
                   ) : (
                     <span>
-                      <strong className="text-slate-200">Merchant Dashboard:</strong> Shopkeepers connect their WhatsApp order number (<span className="text-electric-300 font-mono">7796216506</span>), run 1-Click CSV bulk product imports, configure sizes (XS-XXL, 28-46), and set store GPS address.
+                      <strong className="text-slate-200">Merchant Mobile App:</strong> Real-time order notification routing, mobile catalog management, and store live toggle.
+                    </span>
+                  )}
+                </div>
+              </div>
+            ) : project.desktopImagePath && project.mobileImagePath ? (
+              <div className="mb-6 rounded-2xl bg-navy-950 border border-white/10 p-3 sm:p-4 space-y-3">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3 flex-wrap gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setActiveDevice("desktop")}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
+                        activeDevice === "desktop"
+                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/20"
+                          : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
+                      }`}
+                    >
+                      <Monitor className="w-3.5 h-3.5" />
+                      <span>Desktop Workspace</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveDevice("mobile")}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
+                        activeDevice === "mobile"
+                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/20"
+                          : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
+                      }`}
+                    >
+                      <Smartphone className="w-3.5 h-3.5" />
+                      <span>Mobile Workspace</span>
+                    </button>
+                  </div>
+
+                  <span className="text-[11px] text-electric-400 font-mono">
+                    {activeDevice === "desktop"
+                      ? "RS Fabrication Desktop Dashboard & Invoicing Suite"
+                      : "RS Fabrication Mobile Workshop App"}
+                  </span>
+                </div>
+
+                <div className="relative rounded-xl overflow-hidden bg-navy-900/60 p-2 border border-white/5 flex items-center justify-center min-h-[300px]">
+                  <Image
+                    src={activeDevice === "mobile" ? project.mobileImagePath : project.desktopImagePath}
+                    alt={`${project.title} (${activeDevice} view)`}
+                    width={900}
+                    height={550}
+                    className="w-full max-h-[440px] object-contain rounded-lg shadow-lg"
+                  />
+                </div>
+
+                <div className="text-xs text-slate-400 text-center px-2">
+                  {activeDevice === "desktop" ? (
+                    <span>
+                      <strong className="text-slate-200">Desktop Billing Dashboard:</strong> Full financial overview, GST cash to pay, recent invoices, quotations, purchase records, and one-click cloud backup.
+                    </span>
+                  ) : (
+                    <span>
+                      <strong className="text-slate-200">Mobile Workshop View:</strong> Instant on-site invoice & quotation creation directly from customer fabrication site or workshop floor.
                     </span>
                   )}
                 </div>
@@ -284,9 +481,9 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
                 <Image
                   src={project.imagePath}
                   alt={project.title}
-                  width={700}
-                  height={400}
-                  className="w-full max-h-[320px] object-contain rounded-lg"
+                  width={900}
+                  height={550}
+                  className="w-full max-h-[440px] object-contain rounded-lg shadow-xl"
                 />
               </div>
             ) : null}
@@ -328,23 +525,6 @@ export default function ProjectCard({ project, onOpenDetails }: ProjectCardProps
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              {/* Confirmed Technologies */}
-              <div>
-                <h4 className="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">
-                  Technologies Used
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-lg bg-navy-800 text-electric-300 border border-electric-500/20 text-xs font-mono font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
 
               {/* Integrity Note */}

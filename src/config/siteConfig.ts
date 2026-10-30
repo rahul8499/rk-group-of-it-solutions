@@ -43,6 +43,12 @@ export interface SiteConfig {
     imagePath?: string;
     customerImagePath?: string;
     sellerImagePath?: string;
+    customerDesktopImagePath?: string;
+    customerMobileImagePath?: string;
+    sellerDesktopImagePath?: string;
+    sellerMobileImagePath?: string;
+    desktopImagePath?: string;
+    mobileImagePath?: string;
     mockupType?: "mobile" | "dashboard" | "system";
   }[];
   targetAudiences: {
@@ -78,7 +84,7 @@ export const siteConfig: SiteConfig = {
     email: "rkgroupofitsolution@gmail.com",
     instagramUrl: "https://www.instagram.com/rk_group_of_it_solution?exln=MTN1cTdzOGM4bGUwNQ==",
     addressNote: "Digital & On-Site Consultation by Appointment",
-    businessHours: "Monday – Saturday: 10:00 AM – 7:00 PM IST",
+    businessHours: "Available Anytime (24/7 Support & Consultation)",
   },
   navigation: [
     { name: "Home", href: "/" },
@@ -98,12 +104,12 @@ export const siteConfig: SiteConfig = {
       icon: "Globe",
       category: "Web Engineering",
       deliverables: [
-        "Business websites & company landing pages",
-        "E-commerce websites & product catalogs",
-        "Portfolio & professional showcase sites",
-        "Mobile-first, responsive layouts for all screen sizes",
-        "Contact & enquiry forms with instant notification",
-        "Basic search engine optimization (SEO) setup & fast load times",
+        "Custom Design (Mobile + Desktop)",
+        "Responsive & Ultra-Fast Loading",
+        "SEO Friendly & Google Search Ready",
+        "Easy to Manage & Update",
+        "Contact & WhatsApp Enquiry Integration",
+        "Free SSL Security & Domain Setup Assistance",
       ],
       optionalAddons: [
         "Payment gateway integration (Razorpay / Stripe)",
@@ -132,12 +138,12 @@ export const siteConfig: SiteConfig = {
       icon: "Smartphone",
       category: "Mobile Solutions",
       deliverables: [
-        "Android mobile application development",
-        "Customer-facing shopping & catalog apps",
-        "Business & employee utility tools",
-        "Admin control panel & data synchronization",
-        "Clean navigation, offline caching, and push notifications",
-        "APK generation and Google Play Store readiness",
+        "Custom UI/UX Mobile Design",
+        "User-Friendly & Smooth Experience",
+        "Google Play Store & App Store Ready",
+        "Secure, Reliable & Fast Architecture",
+        "Admin Panel & Real-Time Data Sync",
+        "Push Notifications & Offline Support",
       ],
       optionalAddons: [
         "iOS / Apple App Store build and deployment",
@@ -164,12 +170,12 @@ export const siteConfig: SiteConfig = {
       icon: "Cpu",
       category: "Automation & Systems",
       deliverables: [
-        "Business management & operational systems",
-        "Inventory tracking & stock alert tools",
-        "Customer order & billing workflows",
-        "Custom administrative dashboards & metrics",
-        "Automated PDF invoice generation & reports",
-        "Role-based staff access permissions",
+        "Custom Software Solutions Built For You",
+        "Smart Automation As Per Your Needs",
+        "Business Management & Operational Systems",
+        "Secure Database & Fast Daily Billing",
+        "Automated Invoicing & Instant Reports",
+        "Role-Based Staff Access & Cloud Backup",
       ],
       optionalAddons: [
         "Third-party accounting or ERP synchronization",
@@ -197,12 +203,12 @@ export const siteConfig: SiteConfig = {
       icon: "ShieldCheck",
       category: "Support & Reliability",
       deliverables: [
-        "Website and software health checks",
-        "Bug fixes, error resolution, and troubleshooting",
-        "Software security updates and library patches",
-        "Performance and page speed optimization",
-        "Domain, hosting, and SSL certificate management",
-        "Scheduled data backups and uptime monitoring",
+        "Proactive Website & App Health Checks",
+        "Fast Bug Fixes & Troubleshooting",
+        "Security Patches & Scheduled Backups",
+        "Continuous Reliability & Tech Support",
+        "Page Speed & Performance Optimization",
+        "Domain, Hosting & SSL Management",
       ],
       optionalAddons: [
         "Priority emergency same-day SLA support",
@@ -247,72 +253,45 @@ export const siteConfig: SiteConfig = {
         "Location & Geo-Distance Filter Engine",
       ],
       demoType: "live",
-      imagePath: "/projects/apani-dukan-customer.png",
-      customerImagePath: "/projects/apani-dukan-customer.png",
-      sellerImagePath: "/projects/apani-dukan-seller.png",
+      imagePath: "/projects/apani-dukan-customer-desktop.png",
+      customerImagePath: "/projects/apani-dukan-customer-desktop.png",
+      sellerImagePath: "/projects/apani-dukan-seller-desktop.png",
+      customerDesktopImagePath: "/projects/apani-dukan-customer-desktop.png",
+      customerMobileImagePath: "/projects/apani-dukan-customer-mobile.png",
+      sellerDesktopImagePath: "/projects/apani-dukan-seller-desktop.png",
+      sellerMobileImagePath: "/projects/apani-dukan-seller-mobile.png",
       mockupType: "dashboard",
     },
     {
-      id: "smart-inventory-billing",
-      title: "Smart Inventory & Billing Suite",
-      category: "Custom Business Management",
-      status: "In Development",
+      id: "fabrication-billing",
+      title: "Fabrication & Billing Suite",
+      category: "Industrial Billing & Estimation ERP",
+      status: "Completed",
       shortDescription:
-        "An intuitive desktop and web-based billing platform designed for retail shops and distributors to generate GST/Non-GST invoices and monitor daily stock levels.",
+        "A specialized billing, measurement calculation, and quotation suite engineered specifically for metal fabrication workshops, welding works, aluminum & iron fabricators, and contractors.",
       problem:
-        "Many small shop owners still record inventory in paper notebooks or struggle with bloated, expensive enterprise software that requires complicated training.",
+        "Fabrication workshops struggle with complex measurement calculations (converting feet and inches into square feet, running feet, metal weight in kilograms per pipe/section), leading to costly calculation errors, delayed quotation delivery, and disputed customer advance balances.",
       solution:
-        "A stripped-down, lightning-fast billing dashboard that lets a cashier bill a customer in under 15 seconds while automatically updating inventory counts.",
+        "RK Group of IT Solutions developed a custom Fabrication Billing & Estimation System. Fabricators can input custom dimensions (Length × Height in feet/inches), select materials (MS Steel, SS 304/202, Aluminum, Toughened Glass), auto-calculate square feet & metal weights, generate professional PDF estimates/GST invoices, track customer advances, and send quotations directly via WhatsApp with 1 click.",
       features: [
-        "Rapid keyboard-first barcode and name lookup for instant billing",
-        "Automated low-stock alerts before essential inventory runs out",
-        "Daily, weekly, and monthly revenue summaries and tax calculations",
-        "Thermal receipt printer and A4 invoice PDF support",
+        "Smart Measurement Calculator: Auto-computes Square Feet (Sq. Ft), Running Feet & Metal Weight in Kg",
+        "Multi-Material Rate Masters (MS Steel Pipes, SS 304/202, Aluminum Sections, Toughened Glass & Sheets)",
+        "1-Click Professional Quotation & Estimate Generator with Advance & Balance Tracking",
+        "Instant WhatsApp Sharing: Send PDF Quotations & Invoices directly to customer phones",
+        "GST & Non-GST Tax Invoice Generation with workshop branding, logo and terms",
+        "Job Work & Labor Cost Tracking with cutting/welding worker payment logs",
+        "Customer Outstanding Balance & Payment Reminder System for contractors and builders",
       ],
-      technologies: ["TypeScript", "Next.js", "Node.js", "PostgreSQL"],
-      demoType: "preview",
-      mockupType: "dashboard",
-    },
-    {
-      id: "coaching-institute-portal",
-      title: "EduTrack Institute Portal",
-      category: "Educational Management System",
-      status: "In Development",
-      shortDescription:
-        "A centralized portal for coaching centers, tutors, and private academies to track student attendance, batch schedules, fees, and study material.",
-      problem:
-        "Coaching institutes waste hours each week manually tracking student fees in diaries and sending individual batch reminder messages to parents.",
-      solution:
-        "A dedicated web application where teachers organize batches, record attendance in two clicks, and maintain automated fee collection records.",
-      features: [
-        "Batch scheduling and calendar view for multiple classrooms",
-        "Instant one-click attendance recording for mobile and desktop",
-        "Fee receipt generation with pending payment tracking",
-        "Study notes and PDF assignment distribution module",
+      technologies: [
+        "Next.js / React Architecture",
+        "Tailwind CSS Styling",
+        "Node.js & Database Architecture",
+        "PDF Generation & WhatsApp Routing Engine",
       ],
-      technologies: ["React", "Tailwind CSS", "Node.js", "Cloud Storage"],
-      demoType: "preview",
-      mockupType: "system",
-    },
-    {
-      id: "distributor-order-desk",
-      title: "Wholesale & Distributor Order Desk",
-      category: "B2B Supply Chain Workflow",
-      status: "Concept",
-      shortDescription:
-        "A dedicated B2B order portal connecting wholesale distributors with their retail store network for streamlined bulk ordering.",
-      problem:
-        "Wholesalers spend multiple hours every morning transcribing handwritten or voice-note orders received from dozens of retail shopkeepers.",
-      solution:
-        "A simplified wholesale dealer catalog where retailers place verified bulk orders at their customized tier prices 24/7.",
-      features: [
-        "Tiered wholesale price levels per retailer category",
-        "Minimum order quantity (MOQ) validation and carton packaging rules",
-        "Order status notifications from packing to dispatch",
-        "Credit limit tracking and outstanding invoice statements",
-      ],
-      technologies: ["React", "Next.js", "REST APIs", "Modern Database"],
-      demoType: "preview",
+      demoType: "live",
+      imagePath: "/projects/fabrication-billing-desktop.png",
+      desktopImagePath: "/projects/fabrication-billing-desktop.png",
+      mobileImagePath: "/projects/fabrication-billing-mobile.png",
       mockupType: "dashboard",
     },
   ],

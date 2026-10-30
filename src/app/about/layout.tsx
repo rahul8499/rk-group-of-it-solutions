@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     "Software Engineering Team",
   ],
   alternates: {
-    canonical: "https://rkgroupitsolutions.com/about",
+    canonical: "https://rkgroupofitsolutions.com/about",
   },
   openGraph: {
     title: `About Us | ${siteConfig.companyName}`,
     description:
       "Helping small businesses, local retail shops, and startups solve real operational problems with practical technology.",
-    url: "https://rkgroupitsolutions.com/about",
+    url: "https://rkgroupofitsolutions.com/about",
   },
 };
 

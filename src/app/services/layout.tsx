@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     "RK Group of IT Solutions Services",
   ],
   alternates: {
-    canonical: "https://rkgroupitsolutions.com/services",
+    canonical: "https://rkgroupofitsolutions.com/services",
   },
   openGraph: {
     title: `IT Services & Solutions | ${siteConfig.companyName}`,
     description:
       "Website development, Android apps, custom business software, and ongoing IT support tailored for your business.",
-    url: "https://rkgroupitsolutions.com/services",
+    url: "https://rkgroupofitsolutions.com/services",
   },
 };
 

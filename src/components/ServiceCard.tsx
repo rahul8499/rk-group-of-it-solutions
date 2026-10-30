@@ -37,11 +37,11 @@ export default function ServiceCard({
   };
 
   return (
-    <div className="group relative rounded-2xl bg-navy-900/80 border border-electric-500/15 p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-electric-400/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-electric-500/10">
-      <div>
+    <div className="group relative rounded-2xl bg-navy-900/80 border border-electric-500/15 p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-electric-400/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-electric-500/10 h-full">
+      <div className="flex-1 flex flex-col">
         {/* Top Header */}
-        <div className="flex items-center justify-between mb-5">
-          <div className="w-12 h-12 rounded-xl bg-electric-500/10 border border-electric-500/20 flex items-center justify-center transition-transform group-hover:scale-105">
+        <div className="flex items-center justify-between mb-4">
+          <div className="w-12 h-12 rounded-xl bg-electric-500/10 border border-electric-500/20 flex items-center justify-center transition-transform group-hover:scale-105 flex-shrink-0">
             {getIcon()}
           </div>
           {badge && (
@@ -54,23 +54,23 @@ export default function ServiceCard({
         <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block mb-1">
           {category}
         </span>
-        <h3 className="text-xl font-bold text-white group-hover:text-electric-300 transition-colors">
+        <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-electric-300 transition-colors min-h-[52px] sm:min-h-[56px] flex items-center">
           {title}
         </h3>
-        <p className="text-sm text-slate-400 mt-2.5 leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed min-h-[64px] sm:min-h-[68px]">
           {shortDescription}
         </p>
 
         {/* Key Deliverables Highlights */}
-        <div className="mt-5 pt-5 border-t border-white/5 space-y-2">
+        <div className="mt-auto pt-4 border-t border-white/5 space-y-2">
           <span className="text-xs font-semibold text-slate-300 block">
             What's Included:
           </span>
-          <ul className="space-y-1.5">
-            {deliverables.slice(0, 3).map((item, idx) => (
+          <ul className="space-y-2 min-h-[104px]">
+            {deliverables.slice(0, 4).map((item, idx) => (
               <li key={idx} className="flex items-start gap-2 text-xs text-slate-400">
                 <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                <span>{item}</span>
+                <span className="leading-tight">{item}</span>
               </li>
             ))}
           </ul>
@@ -78,7 +78,7 @@ export default function ServiceCard({
       </div>
 
       {/* Action Footer */}
-      <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+      <div className="mt-5 pt-4 border-t border-white/5 flex items-center justify-between">
         <Link
           href={`/services#${id}`}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-electric-400 hover:text-white transition-colors"
@@ -90,7 +90,7 @@ export default function ServiceCard({
         {onSelectService && (
           <button
             onClick={() => onSelectService(id)}
-            className="text-[11px] px-2.5 py-1 rounded-lg bg-navy-800 hover:bg-electric-500 text-slate-300 hover:text-white transition font-medium"
+            className="text-[11px] px-3 py-1.5 rounded-lg bg-navy-800 hover:bg-electric-500 text-slate-300 hover:text-white transition font-medium active:scale-95"
           >
             Inquire
           </button>

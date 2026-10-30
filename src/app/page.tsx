@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/config/siteConfig";
-import { HeroTechVisual, ApaniDukanMockup } from "@/components/SvgIllustrations";
+import { HeroTechVisual } from "@/components/SvgIllustrations";
 import ServiceCard from "@/components/ServiceCard";
 import ProjectEstimator from "@/components/ProjectEstimator";
 import FaqSection from "@/components/FaqSection";
@@ -27,20 +27,39 @@ import {
   Stethoscope,
   UtensilsCrossed,
   Dumbbell,
-  Sparkles,
-  ExternalLink,
-  PhoneCall,
   ShoppingBag,
   ZoomIn,
   X,
+  Monitor,
+  Smartphone,
 } from "lucide-react";
 
 export default function HomePage() {
   const { openConsultation } = useConsultation();
   const [apaniModalOpen, setApaniModalOpen] = useState(false);
   const [apaniTab, setApaniTab] = useState<"customer" | "seller">("customer");
+  const [apaniDevice, setApaniDevice] = useState<"desktop" | "mobile">("desktop");
   const [modalTab, setModalTab] = useState<"customer" | "seller">("customer");
+  const [modalDevice, setModalDevice] = useState<"desktop" | "mobile">("desktop");
   const [enlargedImage, setEnlargedImage] = useState<{ src: string; title: string } | null>(null);
+
+  const getApaniImage = (tab: "customer" | "seller", device: "desktop" | "mobile") => {
+    if (tab === "customer") {
+      return device === "mobile"
+        ? apaniDukan.customerMobileImagePath || "/projects/apani-dukan-customer-mobile.png"
+        : apaniDukan.customerDesktopImagePath || "/projects/apani-dukan-customer-desktop.png";
+    } else {
+      return device === "mobile"
+        ? apaniDukan.sellerMobileImagePath || "/projects/apani-dukan-seller-mobile.png"
+        : apaniDukan.sellerDesktopImagePath || "/projects/apani-dukan-seller-desktop.png";
+    }
+  };
+
+  const getApaniTitle = (tab: "customer" | "seller", device: "desktop" | "mobile") => {
+    const role = tab === "customer" ? "Customer Shopping Portal" : "Seller / Store Admin Dashboard";
+    const dev = device === "desktop" ? "Desktop Web Interface" : "Mobile Phone Interface";
+    return `Apani Dukan - ${role} (${dev})`;
+  };
 
   const trustHighlights = [
     {
@@ -95,15 +114,17 @@ export default function HomePage() {
   const apaniDukan = siteConfig.projects[0];
 
   return (
-    <div className="space-y-24 sm:space-y-32 pb-24 overflow-hidden">
-      {/* 1. HERO SECTION */}
-      <section className="relative px-4 sm:px-6 lg:px-8 pt-2 sm:pt-16 max-w-7xl mx-auto">
+    <div className="space-y-12 sm:space-y-24 pb-16 sm:pb-24 overflow-hidden">
+      {/* ======================================================== */}
+      {/* 1. HERO SECTION (Simple, Crystal-Clear & Direct)         */}
+      {/* ======================================================== */}
+      <section className="relative px-4 sm:px-6 lg:px-8 pt-2 sm:pt-14 max-w-7xl mx-auto">
         {/* Glow Effects */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-electric-500/10 blur-[130px] rounded-full pointer-events-none -z-10 animate-pulse-slow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-electric-500/10 blur-[130px] rounded-full pointer-events-none -z-10 animate-pulse-slow" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Text */}
-          <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-center lg:text-left">
             <RevealOnScroll direction="down" delay={50}>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-electric-500/10 border border-electric-500/25 text-electric-400 text-xs font-semibold shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-electric-400 animate-pulse" />
@@ -113,20 +134,49 @@ export default function HomePage() {
 
             <RevealOnScroll direction="up" delay={150}>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] sm:leading-[1.12]">
-                <span className="sr-only">RK Group of IT Solutions | RK Group - </span>
-                Technology Solutions That Help Your{" "}
-                <span className="text-gradient-electric">Business Grow</span>
+                <span className="block text-xs sm:text-sm uppercase tracking-widest text-electric-400 font-semibold mb-2">
+                  RK Group of IT Solutions (RK Group)
+                </span>
+                We Build Websites, Mobile Apps & Software That{" "}
+                <span className="text-gradient-electric">Grow Your Business</span>
               </h1>
             </RevealOnScroll>
 
             <RevealOnScroll direction="up" delay={250}>
-              <p className="text-sm sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Welcome to <strong className="font-semibold text-white">RK Group of IT Solutions</strong> (RK Group). We build professional websites, mobile apps, and custom software to help businesses simplify their work, improve efficiency, and grow digitally.
               </p>
             </RevealOnScroll>
 
+            {/* 3 Quick Visual Clarity Feature Pills */}
+            <RevealOnScroll direction="up" delay={300}>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1 max-w-xl mx-auto lg:mx-0 text-left">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-navy-900/80 border border-white/5 hover:border-electric-500/30 transition">
+                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-electric-400 flex-shrink-0" />
+                    <span>Websites</span>
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 leading-snug">Fast, mobile-friendly & Google SEO ready</p>
+                </div>
+                <div className="p-2.5 sm:p-3 rounded-xl bg-navy-900/80 border border-white/5 hover:border-electric-500/30 transition">
+                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
+                    <span>Mobile Apps</span>
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 leading-snug">Android & iOS for customers & store owners</p>
+                </div>
+                <div className="p-2.5 sm:p-3 rounded-xl bg-navy-900/80 border border-white/5 hover:border-electric-500/30 transition">
+                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0" />
+                    <span>Custom Software</span>
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 leading-snug">Billing, inventory & business automation</p>
+                </div>
+              </div>
+            </RevealOnScroll>
+
             <RevealOnScroll direction="up" delay={350}>
-              <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-3.5">
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
                 <button
                   onClick={() => openConsultation()}
                   className="w-full sm:w-auto px-7 py-3 sm:py-3.5 rounded-xl bg-electric-500 hover:bg-electric-600 text-white font-semibold text-sm transition-all duration-200 shadow-xl shadow-electric-500/25 hover:shadow-electric-500/40 active:scale-95 flex items-center justify-center gap-2"
@@ -144,17 +194,17 @@ export default function HomePage() {
               </div>
 
               {/* Quick trust metrics */}
-              <div className="pt-2 sm:pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[11px] sm:text-xs text-slate-400">
+              <div className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   Custom Architecture
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   Transparent Timelines
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   Ongoing Support
                 </span>
               </div>
@@ -170,99 +220,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. TRUST SECTION (Capability-based honesty, no fake metrics) */}
+      {/* ======================================================== */}
+      {/* 2. OUR SERVICES (Requested as 2nd Section)               */}
+      {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="up">
-          <div className="rounded-2xl bg-navy-900/60 border border-electric-500/15 p-6 sm:p-10 backdrop-blur-sm">
-            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-              <h2 className="text-xs uppercase tracking-widest font-semibold text-electric-400">
-                Our Core Principles
-              </h2>
-              <p className="text-2xl sm:text-3xl font-bold text-white mt-1.5">
-                Built on Honesty, Practical Code & Direct Value
-              </p>
-              <p className="text-sm text-slate-400 mt-2">
-                We focus on measurable utility and clear engineering rather than inflated marketing promises.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {trustHighlights.map((item, idx) => (
-                <RevealOnScroll key={idx} direction="up" delay={idx * 100}>
-                  <div className="p-5 rounded-xl bg-navy-950/70 border border-white/5 space-y-2.5 transition-all duration-300 hover:border-electric-500/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-electric-500/10 h-full">
-                    <div className="w-10 h-10 rounded-lg bg-navy-850 flex items-center justify-center">
-                      {item.icon}
-                    </div>
-                    <h3 className="text-base font-semibold text-white">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </RevealOnScroll>
-              ))}
-            </div>
-          </div>
-        </RevealOnScroll>
-      </section>
-
-      {/* 3. TARGET AUDIENCES / WHO WE HELP (Expanded 9 Sectors) */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <RevealOnScroll direction="up">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-electric-400">
-                Businesses We Support
-              </span>
-              <h2 className="text-3xl font-bold text-white mt-1">
-                Engineered for Real-World Workflows
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-md">
-              Whether running a local salon, clinic, retail shop, restaurant, or coaching institute, we design technology suited to your daily operations.
-            </p>
-          </div>
-        </RevealOnScroll>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {siteConfig.targetAudiences.map((aud, index) => (
-            <RevealOnScroll key={index} direction="up" delay={(index % 3) * 100}>
-              <div className="p-6 rounded-2xl bg-navy-900/70 border border-white/5 hover:border-electric-500/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex items-start gap-4 h-full">
-                <div className="w-11 h-11 rounded-xl bg-electric-500/10 border border-electric-500/20 flex-shrink-0 flex items-center justify-center">
-                  {getTargetIcon(aud.icon)}
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-base font-bold text-white">{aud.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    {aud.description}
-                  </p>
-                </div>
-              </div>
-            </RevealOnScroll>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. SERVICES PREVIEW */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <RevealOnScroll direction="up">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-electric-400">
-              What We Do
+              Our Services
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">
-              Practical Services to Grow Your Business
+            <h2 className="text-2xl sm:text-4xl font-bold text-white">
+              Practical Technology Services to Grow Your Business
             </h2>
-            <p className="text-sm text-slate-400">
-              From customer-attracting websites to automated billing software and Android apps.
+            <p className="text-xs sm:text-sm text-slate-400">
+              From customer-attracting websites to automated billing software and Android & iOS mobile apps.
             </p>
           </div>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
           {siteConfig.services.map((svc, idx) => (
-            <RevealOnScroll key={svc.id} direction="up" delay={idx * 100}>
+            <RevealOnScroll key={svc.id} direction="up" delay={idx * 100} className="h-full flex flex-col">
               <ServiceCard
                 id={svc.id}
                 title={svc.title}
@@ -276,7 +254,7 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-8 sm:mt-10 text-center">
           <Link
             href="/services"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-navy-900 hover:bg-navy-850 text-electric-300 font-semibold text-xs tracking-wide uppercase border border-electric-500/20 hover:border-electric-400/50 transition"
@@ -287,16 +265,96 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. FEATURED PROJECT: APANI DUKAN */}
+      {/* ======================================================== */}
+      {/* 3. BUSINESSES WE SUPPORT (Requested as 3rd Section)      */}
+      {/* ======================================================== */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <RevealOnScroll direction="up">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-10">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-electric-400">
+                Businesses We Support
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+                Engineered for Real-World Workflows
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-400 max-w-md">
+              Whether running a local salon, clinic, retail shop, restaurant, or coaching institute, we design technology suited to your daily operations.
+            </p>
+          </div>
+        </RevealOnScroll>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5 items-stretch">
+          {siteConfig.targetAudiences.map((aud, index) => (
+            <RevealOnScroll key={index} direction="up" delay={(index % 3) * 100} className="h-full flex flex-col">
+              <div className="p-4 sm:p-6 rounded-2xl bg-navy-900/70 border border-white/5 hover:border-electric-500/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex items-start gap-4 h-full">
+                <div className="w-10 sm:w-11 h-10 sm:h-11 rounded-xl bg-electric-500/10 border border-electric-500/20 flex-shrink-0 flex items-center justify-center">
+                  {getTargetIcon(aud.icon)}
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm sm:text-base font-bold text-white">{aud.title}</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {aud.description}
+                  </p>
+                </div>
+              </div>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 4. OUR CORE PRINCIPLES (Requested as 4th Section)        */}
+      {/* ======================================================== */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <RevealOnScroll direction="up">
+          <div className="rounded-2xl bg-navy-900/60 border border-electric-500/15 p-5 sm:p-10 backdrop-blur-sm">
+            <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
+              <h2 className="text-xs uppercase tracking-widest font-semibold text-electric-400">
+                Our Core Principles
+              </h2>
+              <p className="text-2xl sm:text-3xl font-bold text-white mt-1.5">
+                Built on Honesty, Practical Code & Direct Value
+              </p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-2">
+                We focus on measurable utility and clear engineering rather than inflated marketing promises.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+              {trustHighlights.map((item, idx) => (
+                <RevealOnScroll key={idx} direction="up" delay={idx * 100} className="h-full flex flex-col">
+                  <div className="p-4 sm:p-5 rounded-xl bg-navy-950/70 border border-white/5 space-y-2.5 transition-all duration-300 hover:border-electric-500/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-electric-500/10 h-full">
+                    <div className="w-10 h-10 rounded-lg bg-navy-850 flex items-center justify-center">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-sm sm:text-base font-semibold text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </RevealOnScroll>
+              ))}
+            </div>
+          </div>
+        </RevealOnScroll>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 5. FEATURED CASE STUDY: APANI DUKAN (5th Section)        */}
+      {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="scale">
-          <div className="rounded-3xl bg-gradient-to-br from-navy-900 via-navy-850 to-navy-950 border border-electric-500/25 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+          <div className="rounded-3xl bg-gradient-to-br from-navy-900 via-navy-850 to-navy-950 border border-electric-500/25 p-5 sm:p-10 lg:p-12 shadow-2xl relative overflow-hidden">
             {/* Subtle background glow */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/10 blur-[100px] pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
               {/* Project Info */}
-              <div className="lg:col-span-6 space-y-6">
+              <div className="lg:col-span-6 space-y-4 sm:space-y-6">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
                     Featured Case Study
@@ -307,7 +365,7 @@ export default function HomePage() {
                 </div>
 
                 <div>
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
                     {apaniDukan.title}
                   </h2>
                   <p className="text-xs sm:text-sm text-electric-400 font-medium mt-1">
@@ -315,14 +373,14 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   {apaniDukan.shortDescription}
                 </p>
 
                 {/* Problem & Solution Compact */}
-                <div className="space-y-3 pt-2">
-                  <div className="p-4 rounded-xl bg-navy-950/80 border border-white/5 space-y-1">
-                    <span className="text-xs font-bold uppercase tracking-wider text-rose-400">
+                <div className="space-y-3 pt-1">
+                  <div className="p-3 sm:p-4 rounded-xl bg-navy-950/80 border border-white/5 space-y-1">
+                    <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-rose-400">
                       The Problem Addressed:
                     </span>
                     <p className="text-xs text-slate-300 leading-relaxed">
@@ -330,8 +388,8 @@ export default function HomePage() {
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-navy-950/80 border border-electric-500/20 space-y-1">
-                    <span className="text-xs font-bold uppercase tracking-wider text-electric-400">
+                  <div className="p-3 sm:p-4 rounded-xl bg-navy-950/80 border border-electric-500/20 space-y-1">
+                    <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-electric-400">
                       Solution Built by RK Group:
                     </span>
                     <p className="text-xs text-slate-300 leading-relaxed">
@@ -362,7 +420,7 @@ export default function HomePage() {
                       setModalTab(apaniTab);
                       setApaniModalOpen(true);
                     }}
-                    className="px-6 py-3 rounded-xl bg-electric-500 hover:bg-electric-600 text-white font-semibold text-xs tracking-wide uppercase transition shadow-lg shadow-electric-500/20 flex items-center gap-2 active:scale-95"
+                    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-electric-500 hover:bg-electric-600 text-white font-semibold text-xs tracking-wide uppercase transition shadow-lg shadow-electric-500/20 flex items-center justify-center gap-2 active:scale-95"
                   >
                     <span>View Case Study</span>
                     <ArrowRight className="w-4 h-4" />
@@ -370,7 +428,7 @@ export default function HomePage() {
 
                   <button
                     onClick={() => openConsultation("mobile-app-development")}
-                    className="px-5 py-3 rounded-xl bg-navy-800 hover:bg-navy-750 text-slate-200 text-xs font-semibold transition border border-white/10 active:scale-95"
+                    className="w-full sm:w-auto px-5 py-3 rounded-xl bg-navy-800 hover:bg-navy-750 text-slate-200 text-xs font-semibold transition border border-white/10 active:scale-95 text-center"
                   >
                     Build an App for Your Shop
                   </button>
@@ -379,32 +437,63 @@ export default function HomePage() {
 
               {/* Right: Real Dual-View App Showcase */}
               <div className="lg:col-span-6 flex flex-col justify-center space-y-3">
-                {/* Dual View Tab Switcher */}
-                <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-navy-950/90 border border-electric-500/20 backdrop-blur-md shadow-xl">
-                  <button
-                    type="button"
-                    onClick={() => setApaniTab("customer")}
-                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 ${
-                      apaniTab === "customer"
-                        ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
-                        : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                    <span>Customer Shopping View</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setApaniTab("seller")}
-                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 ${
-                      apaniTab === "seller"
-                        ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
-                        : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <Store className="w-3.5 h-3.5" />
-                    <span>Seller / Store Admin View</span>
-                  </button>
+                {/* Dual View Tab Switcher + Device Toggle */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-2 p-1.5 rounded-2xl bg-navy-950/90 border border-electric-500/20 backdrop-blur-md shadow-xl">
+                  {/* Role Switcher */}
+                  <div className="flex items-center gap-1 w-full sm:w-auto flex-1">
+                    <button
+                      type="button"
+                      onClick={() => setApaniTab("customer")}
+                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
+                        apaniTab === "customer"
+                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
+                          : "text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Customer View</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setApaniTab("seller")}
+                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
+                        apaniTab === "seller"
+                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
+                          : "text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      <Store className="w-3.5 h-3.5" />
+                      <span>Seller View</span>
+                    </button>
+                  </div>
+
+                  {/* Device Toggle */}
+                  <div className="flex items-center gap-1 p-0.5 rounded-xl bg-navy-900 border border-white/5 w-full sm:w-auto">
+                    <button
+                      type="button"
+                      onClick={() => setApaniDevice("desktop")}
+                      className={`flex-1 sm:flex-none py-1 px-2.5 rounded-lg text-[11px] font-semibold transition flex items-center justify-center gap-1.5 ${
+                        apaniDevice === "desktop"
+                          ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                          : "text-slate-400 hover:text-slate-200"
+                      }`}
+                    >
+                      <Monitor className="w-3.5 h-3.5" />
+                      <span>Desktop</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setApaniDevice("mobile")}
+                      className={`flex-1 sm:flex-none py-1 px-2.5 rounded-lg text-[11px] font-semibold transition flex items-center justify-center gap-1.5 ${
+                        apaniDevice === "mobile"
+                          ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                          : "text-slate-400 hover:text-slate-200"
+                      }`}
+                    >
+                      <Smartphone className="w-3.5 h-3.5" />
+                      <span>Mobile</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Screenshot Display Card */}
@@ -414,14 +503,8 @@ export default function HomePage() {
                     type="button"
                     onClick={() =>
                       setEnlargedImage({
-                        src:
-                          apaniTab === "customer"
-                            ? apaniDukan.customerImagePath || "/projects/apani-dukan-customer.png"
-                            : apaniDukan.sellerImagePath || "/projects/apani-dukan-seller.png",
-                        title:
-                          apaniTab === "customer"
-                            ? "Apani Dukan - Customer Shopping & Nearby Stores Interface"
-                            : "Apani Dukan - Shopkeeper / Seller Dashboard & Product Setup",
+                        src: getApaniImage(apaniTab, apaniDevice),
+                        title: getApaniTitle(apaniTab, apaniDevice),
                       })
                     }
                     className="absolute top-4 right-4 z-10 px-2.5 py-1.5 rounded-lg bg-navy-900/90 hover:bg-electric-500 text-slate-200 hover:text-white border border-white/10 text-[11px] font-medium transition shadow-lg flex items-center gap-1.5 backdrop-blur-md"
@@ -435,31 +518,17 @@ export default function HomePage() {
                   <div
                     onClick={() =>
                       setEnlargedImage({
-                        src:
-                          apaniTab === "customer"
-                            ? apaniDukan.customerImagePath || "/projects/apani-dukan-customer.png"
-                            : apaniDukan.sellerImagePath || "/projects/apani-dukan-seller.png",
-                        title:
-                          apaniTab === "customer"
-                            ? "Apani Dukan - Customer Shopping & Nearby Stores Interface"
-                            : "Apani Dukan - Shopkeeper / Seller Dashboard & Product Setup",
+                        src: getApaniImage(apaniTab, apaniDevice),
+                        title: getApaniTitle(apaniTab, apaniDevice),
                       })
                     }
-                    className="cursor-zoom-in relative rounded-xl overflow-hidden bg-navy-900/50 flex items-center justify-center min-h-[300px]"
+                    className="cursor-zoom-in relative rounded-xl overflow-hidden bg-navy-900/50 flex items-center justify-center min-h-[260px] sm:min-h-[310px]"
                   >
                     <Image
-                      src={
-                        apaniTab === "customer"
-                          ? apaniDukan.customerImagePath || "/projects/apani-dukan-customer.png"
-                          : apaniDukan.sellerImagePath || "/projects/apani-dukan-seller.png"
-                      }
-                      alt={
-                        apaniTab === "customer"
-                          ? "Apani Dukan Customer Shopping Interface by RK Group of IT Solutions"
-                          : "Apani Dukan Shopkeeper Management Interface by RK Group of IT Solutions"
-                      }
-                      width={700}
-                      height={460}
+                      src={getApaniImage(apaniTab, apaniDevice)}
+                      alt={getApaniTitle(apaniTab, apaniDevice)}
+                      width={800}
+                      height={500}
                       className="rounded-lg object-contain w-full h-auto max-h-[380px] transition-transform duration-300 group-hover:scale-[1.01]"
                       priority
                     />
@@ -471,19 +540,23 @@ export default function HomePage() {
                       {apaniTab === "customer" ? (
                         <>
                           <ShoppingBag className="w-3.5 h-3.5" />
-                          <span>Customer Discovery & Cart Portal</span>
+                          <span>Customer Portal • {apaniDevice === "desktop" ? "Desktop Browser" : "Mobile Phone"}</span>
                         </>
                       ) : (
                         <>
                           <Store className="w-3.5 h-3.5" />
-                          <span>Seller Store & Order Management</span>
+                          <span>Seller Store Admin • {apaniDevice === "desktop" ? "Desktop Dashboard" : "Mobile Phone"}</span>
                         </>
                       )}
                     </span>
                     <span className="text-slate-400 text-center sm:text-right">
                       {apaniTab === "customer"
-                        ? "Search verified stores within 2km-20km & order"
-                        : "WhatsApp order phone (+91 7796216506) & 1-Click CSV"}
+                        ? apaniDevice === "desktop"
+                          ? "Browse nearby shops within 2km-20km with map directions"
+                          : "1-Tap fast mobile shopping with WhatsApp direct ordering"
+                        : apaniDevice === "desktop"
+                        ? "1-Click CSV bulk products, variant sizes & GPS pin setup"
+                        : "Shopkeeper order notifications & store status on phone"}
                     </span>
                   </div>
 
@@ -497,30 +570,32 @@ export default function HomePage() {
         </RevealOnScroll>
       </section>
 
-      {/* 6. WHY CHOOSE US */}
+      {/* ======================================================== */}
+      {/* 6. WHY CHOOSE US (Requested as 6th Section)              */}
+      {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="up">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-electric-400">
-              Why Choose RK Group
+              Why Choose Us
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+            <h2 className="text-2xl sm:text-4xl font-bold text-white">
               Practical Engineering for Growing Businesses
             </h2>
-            <p className="text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-400">
               We operate with complete clarity on costs, timelines, and deliverables.
             </p>
           </div>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
           {siteConfig.whyChooseUs.map((reason, i) => (
-            <RevealOnScroll key={i} direction="up" delay={(i % 3) * 100}>
-              <div className="p-6 rounded-2xl bg-navy-900/70 border border-white/5 hover:border-electric-500/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 space-y-2.5 h-full">
+            <RevealOnScroll key={i} direction="up" delay={(i % 3) * 100} className="h-full flex flex-col">
+              <div className="p-5 sm:p-6 rounded-2xl bg-navy-900/70 border border-white/5 hover:border-electric-500/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 space-y-2.5 h-full">
                 <div className="w-10 h-10 rounded-lg bg-electric-500/10 border border-electric-500/20 flex items-center justify-center text-electric-400 font-bold text-sm">
                   0{i + 1}
                 </div>
-                <h3 className="text-base font-bold text-white">{reason.title}</h3>
+                <h3 className="text-sm sm:text-base font-bold text-white">{reason.title}</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
                   {reason.description}
                 </p>
@@ -530,26 +605,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. HOW WE WORK (5-STEP PROCESS) */}
+      {/* ======================================================== */}
+      {/* 7. CLEAR DEVELOPMENT PROCESS (Requested as 7th Section)  */}
+      {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="up">
-          <div className="rounded-2xl bg-navy-900/60 border border-electric-500/15 p-8 sm:p-12">
-            <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
+          <div className="rounded-2xl bg-navy-900/60 border border-electric-500/15 p-5 sm:p-10">
+            <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10 space-y-2">
               <span className="text-xs font-semibold uppercase tracking-wider text-electric-400">
                 Clear Development Process
               </span>
-              <h2 className="text-3xl font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">
                 How We Work With You
               </h2>
-              <p className="text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-400">
                 A transparent five-step roadmap from initial conversation to project launch.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4 items-stretch">
               {siteConfig.workSteps.map((step, idx) => (
-                <RevealOnScroll key={step.step} direction="up" delay={idx * 80}>
-                  <div className="relative p-5 rounded-xl bg-navy-950/80 border border-white/5 space-y-3 flex flex-col justify-between h-full hover:border-electric-500/30 transition-all">
+                <RevealOnScroll key={step.step} direction="up" delay={idx * 80} className="h-full flex flex-col">
+                  <div className="relative p-4 sm:p-5 rounded-xl bg-navy-950/80 border border-white/5 space-y-2 sm:space-y-3 flex flex-col justify-between h-full hover:border-electric-500/30 transition-all">
                     <div>
                       <span className="text-xs font-mono font-bold text-electric-400">
                         Step {step.step}
@@ -557,7 +634,7 @@ export default function HomePage() {
                       <h3 className="text-sm font-bold text-white mt-1">
                         {step.title}
                       </h3>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-2">
+                      <p className="text-xs text-slate-400 leading-relaxed mt-1.5 sm:mt-2">
                         {step.description}
                       </p>
                     </div>
@@ -569,36 +646,42 @@ export default function HomePage() {
         </RevealOnScroll>
       </section>
 
-      {/* 8. INTERACTIVE PROJECT SCOPE ESTIMATOR */}
+      {/* ======================================================== */}
+      {/* 8. ESTIMATE YOUR PROJECT SCOPE & TIMELINE (8th Section)   */}
+      {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="up">
           <ProjectEstimator />
         </RevealOnScroll>
       </section>
 
-      {/* 9. FREQUENTLY ASKED QUESTIONS */}
+      {/* ======================================================== */}
+      {/* 9. FREQUENTLY ASKED QUESTIONS (9th Section)               */}
+      {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="up">
           <FaqSection />
         </RevealOnScroll>
       </section>
 
-      {/* 10. FINAL CTA */}
+      {/* ======================================================== */}
+      {/* 10. READY TO UPGRADE / HAVE A PROBLEM WE CAN SOLVE?      */}
+      {/* ======================================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <RevealOnScroll direction="scale">
-          <div className="rounded-3xl bg-gradient-to-r from-navy-900 via-navy-850 to-navy-900 border border-electric-500/30 p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl">
-            <div className="max-w-2xl mx-auto space-y-5">
+          <div className="rounded-3xl bg-gradient-to-r from-navy-900 via-navy-850 to-navy-900 border border-electric-500/30 p-6 sm:p-12 text-center relative overflow-hidden shadow-2xl">
+            <div className="max-w-2xl mx-auto space-y-4 sm:space-y-5">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-electric-500/10 text-electric-300 border border-electric-500/20">
                 Ready to Upgrade Your Business?
               </span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
                 Have a Business Problem We Can Solve?
               </h2>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
                 Tell us what you need. Let’s discuss a practical digital solution for your business.
               </p>
 
-              <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="pt-2 sm:pt-3 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Link
                   href="/contact"
                   className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-electric-500 hover:bg-electric-600 text-white font-semibold text-sm transition shadow-xl shadow-electric-500/25 active:scale-95 text-center"
@@ -617,7 +700,9 @@ export default function HomePage() {
         </RevealOnScroll>
       </section>
 
-      {/* Apani Dukan Detail Modal with Dual Customer/Seller Real Screen Explorer */}
+      {/* ======================================================== */}
+      {/* APANI DUKAN DETAIL MODAL (Customer / Seller Explorer)    */}
+      {/* ======================================================== */}
       {apaniModalOpen && (
         <div
           role="dialog"
@@ -660,37 +745,72 @@ export default function HomePage() {
               {/* Dual View Screen Showcase inside Modal */}
               <div className="rounded-2xl bg-navy-950 border border-electric-500/20 p-4 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setModalTab("customer")}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
-                        modalTab === "customer"
-                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
-                          : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
-                      }`}
-                    >
-                      <ShoppingBag className="w-3.5 h-3.5" />
-                      <span>Customer Shopping View</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setModalTab("seller")}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
-                        modalTab === "seller"
-                          ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
-                          : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
-                      }`}
-                    >
-                      <Store className="w-3.5 h-3.5" />
-                      <span>Seller / Store Admin View</span>
-                    </button>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {/* Role tabs */}
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => setModalTab("customer")}
+                        className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
+                          modalTab === "customer"
+                            ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
+                            : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
+                        }`}
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>Customer View</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setModalTab("seller")}
+                        className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
+                          modalTab === "seller"
+                            ? "bg-electric-500 text-white shadow-lg shadow-electric-500/25"
+                            : "bg-navy-850 text-slate-400 hover:text-white border border-white/5"
+                        }`}
+                      >
+                        <Store className="w-3.5 h-3.5" />
+                        <span>Seller View</span>
+                      </button>
+                    </div>
+
+                    {/* Device toggle */}
+                    <div className="flex items-center gap-1 p-0.5 rounded-xl bg-navy-900 border border-white/5">
+                      <button
+                        type="button"
+                        onClick={() => setModalDevice("desktop")}
+                        className={`py-1 px-2.5 rounded-lg text-[11px] font-semibold transition flex items-center gap-1 ${
+                          modalDevice === "desktop"
+                            ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <Monitor className="w-3.5 h-3.5" />
+                        <span>Desktop</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setModalDevice("mobile")}
+                        className={`py-1 px-2.5 rounded-lg text-[11px] font-semibold transition flex items-center gap-1 ${
+                          modalDevice === "mobile"
+                            ? "bg-navy-800 text-white border border-white/10 shadow-sm"
+                            : "text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        <Smartphone className="w-3.5 h-3.5" />
+                        <span>Mobile</span>
+                      </button>
+                    </div>
                   </div>
 
                   <span className="text-[11px] font-mono text-electric-400">
                     {modalTab === "customer"
-                      ? "Screen 1: Customer Nearby Discovery & Cart"
-                      : "Screen 2: Merchant Store Setup & 1-Click Import"}
+                      ? modalDevice === "desktop"
+                        ? "Customer View (Desktop Storefront)"
+                        : "Customer View (Mobile Shopping App)"
+                      : modalDevice === "desktop"
+                      ? "Merchant View (Desktop Admin Dashboard)"
+                      : "Merchant View (Mobile Store Manager)"}
                   </span>
                 </div>
 
@@ -699,33 +819,19 @@ export default function HomePage() {
                   <div
                     onClick={() =>
                       setEnlargedImage({
-                        src:
-                          modalTab === "customer"
-                            ? apaniDukan.customerImagePath || "/projects/apani-dukan-customer.png"
-                            : apaniDukan.sellerImagePath || "/projects/apani-dukan-seller.png",
-                        title:
-                          modalTab === "customer"
-                            ? "Apani Dukan - Customer Shopping Portal"
-                            : "Apani Dukan - Merchant Setup & Inventory Dashboard",
+                        src: getApaniImage(modalTab, modalDevice),
+                        title: getApaniTitle(modalTab, modalDevice),
                       })
                     }
                     className="cursor-zoom-in w-full flex items-center justify-center"
                     title="Click to view full screen"
                   >
                     <Image
-                      src={
-                        modalTab === "customer"
-                          ? apaniDukan.customerImagePath || "/projects/apani-dukan-customer.png"
-                          : apaniDukan.sellerImagePath || "/projects/apani-dukan-seller.png"
-                      }
-                      alt={
-                        modalTab === "customer"
-                          ? "Apani Dukan Customer Shopping Portal"
-                          : "Apani Dukan Merchant Management Dashboard"
-                      }
-                      width={850}
-                      height={500}
-                      className="rounded-lg object-contain w-full h-auto max-h-[420px] shadow-2xl hover:opacity-95 transition"
+                      src={getApaniImage(modalTab, modalDevice)}
+                      alt={getApaniTitle(modalTab, modalDevice)}
+                      width={900}
+                      height={550}
+                      className="rounded-lg object-contain w-full h-auto max-h-[440px] shadow-2xl hover:opacity-95 transition"
                     />
                   </div>
 
@@ -841,23 +947,6 @@ export default function HomePage() {
                 </ul>
               </div>
 
-              {/* Technologies Used */}
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                  Technologies Used:
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {apaniDukan.technologies.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 rounded bg-navy-800 text-electric-300 text-xs font-mono"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
               {/* Modal Actions */}
               <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
@@ -892,7 +981,9 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Full-Screen Image Lightbox */}
+      {/* ======================================================== */}
+      {/* FULL-SCREEN IMAGE LIGHTBOX                                */}
+      {/* ======================================================== */}
       {enlargedImage && (
         <div
           role="dialog"

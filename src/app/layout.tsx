@@ -15,17 +15,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const baseUrl = "https://rkgroupitsolutions.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rkgroupofitsolutions.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${siteConfig.companyName} | ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.companyName}`,
+    default: "RK Group of IT Solutions (RK Group) | Websites, Mobile Apps & Custom Software",
+    template: `%s | ${siteConfig.companyName} (RK Group)`,
   },
   description:
-    "RK Group of IT Solutions provides professional website development, Android mobile apps, billing software, and custom software solutions for businesses and retail stores.",
-  applicationName: siteConfig.companyName,
+    "Official website of RK Group of IT Solutions (RK Group). We build professional websites, Android/iOS mobile apps, billing software, and custom business management systems.",
+  applicationName: "RK Group of IT Solutions (RK Group)",
   keywords: [
     // Exact branded match keywords for Google
     "RK Group",
@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     "RK Group Official",
     "RK Group Website",
     "rkgroup",
+    "rkgroupofitsolutions",
+    "rkgroupofitsolutions.com",
+    "https://rkgroupofitsolutions.com",
     "rkgroupitsolutions",
     "rkgroupofitsolution",
     "rk_group_of_it_solution",
@@ -81,28 +84,30 @@ export const metadata: Metadata = {
     shortcut: "/brand-solutions-logo.png",
     apple: "/brand-solutions-logo.png",
   },
+  manifest: "/manifest.webmanifest",
+  referrer: "origin-when-cross-origin",
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: baseUrl,
-    title: `${siteConfig.companyName} | Technology Solutions That Help Your Business Grow`,
+    title: "RK Group of IT Solutions (RK Group) | Websites, Mobile Apps & Software",
     description:
-      "Professional websites, Android mobile applications, billing software, and custom IT solutions engineered by RK Group of IT Solutions.",
-    siteName: siteConfig.companyName,
+      "Official website of RK Group of IT Solutions (RK Group). Professional websites, Android/iOS mobile applications, billing software, and custom IT solutions.",
+    siteName: "RK Group of IT Solutions (RK Group)",
     images: [
       {
         url: "/brand-solutions-logo.png",
         width: 987,
         height: 269,
-        alt: `${siteConfig.companyName} Logo`,
+        alt: `${siteConfig.companyName} (RK Group) Official Logo`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.companyName} | ${siteConfig.tagline}`,
+    title: "RK Group of IT Solutions (RK Group) | Websites, Mobile Apps & Software",
     description:
-      "Professional websites, Android mobile applications, billing software, and custom IT solutions engineered by RK Group of IT Solutions.",
+      "Official website of RK Group of IT Solutions (RK Group). Professional websites, Android/iOS mobile applications, billing software, and custom IT solutions.",
     images: ["/brand-solutions-logo.png"],
   },
   robots: {
@@ -120,6 +125,7 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || "",
   },
   category: "technology",
   classification: "IT Services and Software Development",

@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     "Custom Software Portfolio",
   ],
   alternates: {
-    canonical: "https://rkgroupitsolutions.com/projects",
+    canonical: "https://rkgroupofitsolutions.com/projects",
   },
   openGraph: {
     title: `Projects & Case Studies | ${siteConfig.companyName}`,
     description:
       "Explore Apani Dukan and real-world digital solutions engineered by RK Group of IT Solutions.",
-    url: "https://rkgroupitsolutions.com/projects",
+    url: "https://rkgroupofitsolutions.com/projects",
   },
 };
 

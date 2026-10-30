@@ -7,6 +7,9 @@ import { ShieldCheck, Lock, FileText, ArrowLeft } from "lucide-react";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: `Privacy policy and information handling practices of ${siteConfig.companyName}.`,
+  alternates: {
+    canonical: "https://rkgroupofitsolutions.com/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicyPage() {
