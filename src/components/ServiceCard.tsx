@@ -82,8 +82,10 @@ export default function ServiceCard({
         <Link
           href={`/services#${id}`}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-electric-400 hover:text-white transition-colors"
+          aria-label={`Learn more about ${title} services`}
         >
           <span>Learn More</span>
+          <span className="sr-only">about {title}</span>
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
         </Link>
 
@@ -91,6 +93,7 @@ export default function ServiceCard({
           <button
             onClick={() => onSelectService(id)}
             className="text-[11px] px-3 py-1.5 rounded-lg bg-navy-800 hover:bg-electric-500 text-slate-300 hover:text-white transition font-medium active:scale-95"
+            aria-label={`Inquire about ${title} service`}
           >
             Inquire
           </button>

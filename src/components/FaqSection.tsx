@@ -72,9 +72,11 @@ export default function FaqSection() {
               }`}
             >
               <button
+                id={`faq-btn-${index}`}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 focus:outline-none"
                 aria-expanded={isOpen}
+                aria-controls={`faq-answer-${index}`}
               >
                 <span className="text-xs sm:text-sm font-bold text-white">
                   {faq.question}
@@ -87,7 +89,12 @@ export default function FaqSection() {
               </button>
 
               {isOpen && (
-                <div className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 animate-in fade-in duration-200">
+                <div
+                  id={`faq-answer-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${index}`}
+                  className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 animate-in fade-in duration-200"
+                >
                   {faq.answer}
                 </div>
               )}

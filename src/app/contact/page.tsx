@@ -50,7 +50,7 @@ export default function ContactPage() {
             Direct Business Inquiries
           </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Let’s Discuss Your <span className="text-gradient-electric">Next Project</span>
+            Contact RK Group of IT Solutions | <span className="text-gradient-electric">Get In Touch</span>
           </h1>
           <p className="text-base text-slate-300 leading-relaxed">
             Tell us about your business requirement. We will review your scope and provide a transparent, practical roadmap.

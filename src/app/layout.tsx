@@ -78,6 +78,9 @@ export const metadata: Metadata = {
   publisher: siteConfig.companyName,
   alternates: {
     canonical: baseUrl,
+    types: {
+      "application/rss+xml": `${baseUrl}/feed.xml`,
+    },
   },
   icons: {
     icon: "/brand-solutions-logo.png",

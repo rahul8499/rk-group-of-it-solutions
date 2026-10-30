@@ -44,7 +44,7 @@ export default function ServicesPage() {
             Practical & Honest IT Services
           </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Services Engineered for <span className="text-gradient-electric">Business Growth</span>
+            IT Services by RK Group | <span className="text-gradient-electric">Engineered For Growth</span>
           </h1>
           <p className="text-base text-slate-300 leading-relaxed">
             We clearly separate standard core inclusions from optional advanced add-ons so you get complete transparency with zero hidden surprises.

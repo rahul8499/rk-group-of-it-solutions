@@ -132,7 +132,7 @@ export default function JsonLd() {
         },
       },
 
-      // 3. Local Business / Professional Service Entity
+      // 3. Local Business / Professional Service Entity with Review Rating & Geo
       {
         "@type": "ProfessionalService",
         "@id": `${baseUrl}/#localbusiness`,
@@ -155,6 +155,18 @@ export default function JsonLd() {
           latitude: 18.5204,
           longitude: 73.8567,
         },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "34",
+          bestRating: "5",
+          worstRating: "1",
+        },
+        areaServed: [
+          { "@type": "City", "name": "Pune" },
+          { "@type": "State", "name": "Maharashtra" },
+          { "@type": "Country", "name": "India" },
+        ],
         openingHoursSpecification: [
           {
             "@type": "OpeningHoursSpecification",
@@ -318,6 +330,30 @@ export default function JsonLd() {
             name: "Contact",
             item: `${baseUrl}/contact`,
           },
+        ],
+      },
+
+      // 7. Founder Person Entity
+      {
+        "@type": "Person",
+        "@id": `${baseUrl}/#founder`,
+        name: "Rahul Kolhe",
+        jobTitle: "Founder & Lead Software Engineer",
+        worksFor: {
+          "@id": `${baseUrl}/#organization`,
+        },
+        sameAs: [
+          "https://github.com/rahul8499",
+          siteConfig.contact.instagramUrl,
+        ],
+        knowsAbout: [
+          "Website Development",
+          "Android App Development",
+          "Custom Software Architecture",
+          "Next.js",
+          "React",
+          "Database Architecture",
+          "Python",
         ],
       },
     ],

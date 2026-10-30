@@ -33,7 +33,7 @@ export default function AboutPage() {
             About RK Group of IT Solutions
           </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Technology Made <span className="text-gradient-electric">Practical for Businesses</span>
+            About RK Group of IT Solutions | <span className="text-gradient-electric">Practical Tech for Business</span>
           </h1>
           <p className="text-base text-slate-300 leading-relaxed">
             {siteConfig.tagline}
