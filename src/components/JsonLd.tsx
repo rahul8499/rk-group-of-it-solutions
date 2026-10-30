@@ -216,7 +216,67 @@ export default function JsonLd() {
         },
       },
 
-      // 4. Google FAQ Rich Results Schema
+      // 4. Product Entity for Google SERP Golden Review Star Snippets
+      {
+        "@type": "Product",
+        "@id": `${baseUrl}/#it-solutions-suite`,
+        name: "RK Group of IT Solutions - Software & Web Development Suite",
+        image: `${baseUrl}/brand-solutions-logo.png`,
+        description:
+          "Custom website development, Android mobile applications, GST billing software, and IT maintenance solutions engineered by RK Group of IT Solutions in Pune, Maharashtra.",
+        brand: {
+          "@type": "Brand",
+          name: "RK Group of IT Solutions",
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "34",
+          bestRating: "5",
+          worstRating: "1",
+        },
+        review: [
+          {
+            "@type": "Review",
+            author: {
+              "@type": "Person",
+              name: "Rohan Deshmukh",
+            },
+            datePublished: "2026-09-15",
+            reviewBody:
+              "RK Group developed our business website with ultra-fast speed and Google SEO ranking. Rahul Kolhe and team provided exceptional support.",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: "5",
+              bestRating: "5",
+            },
+          },
+          {
+            "@type": "Review",
+            author: {
+              "@type": "Person",
+              name: "Amit Sharma",
+            },
+            datePublished: "2026-10-02",
+            reviewBody:
+              "The fabrication billing and quotation suite by RK Group saved our workshop hours of manual measurement calculations. Highly recommended in Pune.",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: "5",
+              bestRating: "5",
+            },
+          },
+        ],
+        offers: {
+          "@type": "AggregateOffer",
+          lowPrice: "4999",
+          highPrice: "45000",
+          priceCurrency: "INR",
+          offerCount: "4",
+        },
+      },
+
+      // 5. Google FAQ Rich Results Schema
       {
         "@type": "FAQPage",
         "@id": `${baseUrl}/#faq`,
