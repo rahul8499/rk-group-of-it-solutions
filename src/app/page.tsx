@@ -133,50 +133,20 @@ export default function HomePage() {
               </div>
             </RevealOnScroll>
 
-            <RevealOnScroll direction="up" delay={150}>
+            <RevealOnScroll direction="up" delay={100}>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] sm:leading-[1.12]">
-                <span className="block text-xs sm:text-sm uppercase tracking-widest text-electric-400 font-semibold mb-2">
-                  RK Group of IT Solutions (RK Group)
-                </span>
                 We Build Websites, Mobile Apps & Software That{" "}
                 <span className="text-gradient-electric">Grow Your Business</span>
               </h1>
             </RevealOnScroll>
 
-            <RevealOnScroll direction="up" delay={250}>
+            <RevealOnScroll direction="up" delay={150}>
               <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                Welcome to <strong className="font-semibold text-white">RK Group of IT Solutions</strong> (RK Group). We build professional websites, mobile apps, and custom software to help businesses simplify their work, improve efficiency, and grow digitally.
+                Welcome to <strong className="font-semibold text-white">RK Group of IT Solutions</strong>. We build professional websites, mobile apps, and custom software to help businesses simplify their work, improve efficiency, and grow digitally.
               </p>
             </RevealOnScroll>
 
-            {/* 3 Quick Visual Clarity Feature Pills */}
-            <RevealOnScroll direction="up" delay={300}>
-              <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1 max-w-xl mx-auto lg:mx-0 text-left">
-                <div className="p-2.5 sm:p-3 rounded-xl bg-navy-900/80 border border-white/5 hover:border-electric-500/30 transition">
-                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-electric-400 flex-shrink-0" />
-                    <span>Websites</span>
-                  </div>
-                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 leading-snug">Fast, mobile-friendly & Google SEO ready</p>
-                </div>
-                <div className="p-2.5 sm:p-3 rounded-xl bg-navy-900/80 border border-white/5 hover:border-electric-500/30 transition">
-                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
-                    <span>Mobile Apps</span>
-                  </div>
-                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 leading-snug">Android & iOS for customers & store owners</p>
-                </div>
-                <div className="p-2.5 sm:p-3 rounded-xl bg-navy-900/80 border border-white/5 hover:border-electric-500/30 transition">
-                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0" />
-                    <span>Custom Software</span>
-                  </div>
-                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 leading-snug">Billing, inventory & business automation</p>
-                </div>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll direction="up" delay={350}>
+            <RevealOnScroll direction="up" delay={200}>
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
                 <button
                   onClick={() => openConsultation()}
